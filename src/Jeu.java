@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-//import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeUnit;
+
 public class Jeu {
 	private ArrayList<Piece> pieces;
 	private Personnage perso;
@@ -7,13 +8,13 @@ public class Jeu {
 	Jeu()
 	{
 		//FenetreLancement f=new FenetreLancement();
-		/*perso=Sauvegarde.charger();
+		//perso=Sauvegarde.charger();
 		perso=new Chien("Pipou");
 		pieces=new ArrayList<Piece>();
-		initPieces();*/
+		initPieces();
 		Interface Iface=new Interface("jeu", perso, pieces);
-		Iface.initFenetreCreation();
-		//Iface.initFenetreJeu();
+		//Iface.initFenetreCreation();
+		Iface.initFenetreJeu();
 		//Sauvegarde.sauvegarder(perso);
 		//initPerso();
 	}
@@ -80,7 +81,7 @@ public class Jeu {
 			}
 		}
 	}
-	/*private void interact()
+	private void interact()
 	{
 		ArrayList<Boolean> b=Iface.getBoutonAppuye();
 		for(int i=0;i<b.size();i++)
@@ -108,5 +109,5 @@ public class Jeu {
 		{
 			System.out.println("Interruption");
 		}
-	}*/
+	}
 }
