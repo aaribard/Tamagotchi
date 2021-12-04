@@ -7,6 +7,7 @@ public class Jeu {
 	private Interface Iface;
 	Jeu()
 	{
+		
 		//FenetreLancement f=new FenetreLancement();
 		//perso=Sauvegarde.charger();
 		perso=new Chien("Pipou");
