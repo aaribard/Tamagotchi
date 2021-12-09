@@ -9,14 +9,14 @@ public class Jeu {
 	{
 		
 		//FenetreLancement f=new FenetreLancement();
-		//perso=Sauvegarde.charger();
+		/*perso=Sauvegarde.charger();
 		perso=new Chien("Pipou");
 		pieces=new ArrayList<Piece>();
 		initPieces();
 		Interface Iface=new Interface("jeu", perso, pieces);
-		//Iface.initFenetreCreation();
-		Iface.initFenetreJeu();
-		//Sauvegarde.sauvegarder(perso);
+		Iface.initFenetreCreation();
+		/*Iface.initFenetreJeu();
+		Sauvegarde.sauvegarder(perso);*/
 		//initPerso();
 	}
 	public void initPieces()

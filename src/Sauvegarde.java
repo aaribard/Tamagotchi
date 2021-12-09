@@ -5,7 +5,7 @@ public class Sauvegarde {
     public static void sauvegarder(Personnage perso)
     {
          try{
-                String nomFichier = perso.getNom()+perso.getDateNaissanceListe().get(2)+"_"+perso.getDateNaissanceListe().get(1)+"_"+perso.getDateNaissanceListe().get(0)+".txt";
+                String nomFichier = perso.getNom()+"_"+perso.getDateNaissanceListe().get(2)+"_"+perso.getDateNaissanceListe().get(1)+"_"+perso.getDateNaissanceListe().get(0)+".txt";
                 PrintWriter txtSauv = new PrintWriter(new FileWriter("save/"+nomFichier));
                 ArrayList<Integer> dateNaissance=perso.getDateNaissanceListe();
                 txtSauv.println(perso.getNom());

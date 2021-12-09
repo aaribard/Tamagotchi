@@ -10,6 +10,10 @@ public class Interface{
         perso =p;
         pieces = pi;
     }
+    Interface()
+    {
+        
+    }
     void initFenetreCreation()
     {
         f1=new FenetreCreation();

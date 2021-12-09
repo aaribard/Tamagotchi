@@ -1,6 +1,10 @@
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.io.*;
 
 
 public class FenetreLancement extends JFrame{
@@ -10,9 +14,20 @@ public class FenetreLancement extends JFrame{
     JPanel panneau4;
     JLabel texteQuestion; 
     JTextField champNom;
-    JButton boutonQuitter;
-    JButton boutonCharger;
+
     JButton boutonNouvellePartie;
+
+    JButton boutonChargerPartie1;
+    JButton boutonChargerPartie2;
+    JButton boutonChargerPartie3;
+    JButton boutonChargerPartie4;
+
+    JButton flecheChargerPartieDroite;
+    JButton flecheChargerPartieGauche;
+
+
+    JLabel texteChargerPartie;
+    JButton boutonQuitter;
     boolean active;
 
 
@@ -39,11 +54,93 @@ public class FenetreLancement extends JFrame{
         panneau4.setBackground(Color.black);
         panneau4.setLayout(null);
 
-        texteQuestion =new JLabel("Voulez vous charger un partie existante ou commencer une nouvelle?"); 
+        texteQuestion =new JLabel("<html>Voulez vous charger un partie existante <br/>ou commencer une nouvelle?</html>"); 
         texteQuestion.setBounds(0,0,400,50);
-        texteQuestion.setFont(new Font("Bookman Old Style", Font.PLAIN, 12));
+        texteQuestion.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
 
         panneau1.add(texteQuestion);
+
+        boutonNouvellePartie = new JButton("Nouvelle partie");
+        boutonNouvellePartie.setBounds(0,0,400,50);
+        boutonNouvellePartie.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+
+        boutonNouvellePartie.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+            {
+        
+            }});
+        panneau2.add(boutonNouvellePartie);
+
+        texteChargerPartie = new JLabel("Charger partie", JLabel.CENTER);
+        texteChargerPartie.setBounds(0,0,400,50);
+        texteChargerPartie.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+
+        panneau3.add(texteChargerPartie);
+
+        ArrayList<String[]> e = getListeSauvegardes();
+
+        if(e.size()>=1)
+        {
+        boutonChargerPartie1 = new JButton("<html>"+e.get(0)[0]+"<br/>"+e.get(0)[1]+"/"+e.get(0)[2]+"/"+e.get(0)[3]+"</html>");
+        boutonChargerPartie1.setBounds(20,50,180,50);
+        boutonChargerPartie1.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+        boutonChargerPartie1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+            {
+        
+            }});
+        panneau3.add(boutonChargerPartie1);
+        }
+        if(e.size()>=2)
+        {
+            boutonChargerPartie2 = new JButton("<html>"+e.get(1)[0]+"<br/>"+e.get(1)[1]+"/"+e.get(1)[2]+"/"+e.get(1)[3]+"</html>");
+            boutonChargerPartie2.setBounds(200,50,180,50);
+            boutonChargerPartie2.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+            boutonChargerPartie2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+            
+                }});
+            panneau3.add(boutonChargerPartie2);
+        }
+        if(e.size()>=3)
+        {
+            boutonChargerPartie3 = new JButton("<html>"+e.get(2)[0]+"<br/>"+e.get(2)[1]+"/"+e.get(2)[2]+"/"+e.get(2)[3]+"</html>");
+            boutonChargerPartie3.setBounds(20,100,180,50);
+            boutonChargerPartie3.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+            boutonChargerPartie3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+            
+                }});
+            panneau3.add(boutonChargerPartie3);
+        }
+        if(e.size()>=4)
+        {
+            boutonChargerPartie4 = new JButton("<html>"+e.get(3)[0]+"<br/>"+e.get(3)[1]+"/"+e.get(3)[2]+"/"+e.get(3)[3]+"</html>");
+            boutonChargerPartie4.setBounds(200,100,180,50);
+            boutonChargerPartie4.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+            boutonChargerPartie4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+            
+                }});
+            panneau3.add(boutonChargerPartie4);
+        }
+        if(e.size()>4)
+        {
+            flecheChargerPartieDroite = new JButton();
+            flecheChargerPartieDroite.setBounds(380,50,20,100);
+            flecheChargerPartieDroite.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+            
+                }});
+
+            flecheChargerPartieGauche = new JButton();
+            flecheChargerPartieGauche.setBounds(0,50,20,100);
+            flecheChargerPartieGauche.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+            
+                }});
+
+            panneau3.add(flecheChargerPartieDroite);
+            panneau3.add(flecheChargerPartieGauche);
+        }
 
 
         this.add(panneau1);
@@ -62,5 +159,32 @@ public class FenetreLancement extends JFrame{
     boolean getActive()
     {
         return active;
+    }
+
+    void commencerPartie(String nomFichier)
+    {
+        
+    }
+
+    ArrayList<String[]> getListeSauvegardes() 
+    {
+        ArrayList<String[]> listeSauvegardes=new ArrayList<String[]>();
+        File repertoire = new File("save");
+        String liste[] = repertoire.list();      
+ 
+        if (liste != null) 
+        {         
+            for (int i = 0; i < liste.length; i++) 
+            {
+                String[] splitDot = liste[i].split("\\.");//decouper au point pour enlever ".txt"
+                String[] elemNom = splitDot[0].split("_");//decouper aux "_"
+                listeSauvegardes.add(elemNom);
+            }
+        }
+        else 
+        {
+            System.err.println("Nom de repertoire invalide");
+        }
+        return listeSauvegardes;
     }
 }
