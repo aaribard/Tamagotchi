@@ -78,7 +78,7 @@ public class FenetreJeu extends JFrame{
     JButton boutonJardin;
 
     boolean demanderSauvegarder=false;
-
+    boolean demanderQuitter=false;
     ArrayList<Boolean> boutonAppuye;
 
     FenetreJeu(Personnage perso, ArrayList<Piece> pieces)
@@ -113,9 +113,9 @@ public class FenetreJeu extends JFrame{
 
         affichagePanneau1(perso);
 
-        creationStats(perso);
+        affichagePanneau2(perso);
 
-        creationBarres(perso);
+        affichagePanneau3(perso);
 
         affichagePanneau4(perso, pieces);
 
@@ -195,7 +195,7 @@ public class FenetreJeu extends JFrame{
         panneau1.add(imagePieceLabel);
     }
 
-    void creationStats(Personnage perso)
+    void affichagePanneau2(Personnage perso)
     {
         int l=largeur*3/8;
         int h=hauteur*1/2;
@@ -250,7 +250,7 @@ public class FenetreJeu extends JFrame{
             }});
     }
 
-    void creationBarres(Personnage perso)
+    void affichagePanneau3(Personnage perso)
     {
         int l=largeur*5/8;
         int h=hauteur*1/2;
@@ -576,10 +576,33 @@ public class FenetreJeu extends JFrame{
         boutonAllerToilettes.setVisible(false);
         boutonJouer.setVisible(false);
     }
+
     ArrayList<Boolean> getBoutonAppuye()
     {
         return boutonAppuye;
     }
+    void resetBoutonAppuye()
+    {
+        boutonAppuye=new ArrayList<Boolean>(Arrays.asList(false,false,false,false,false,false));
+    }
+
+    boolean getBoutonSauvegarde()
+    {
+        return demanderSauvegarder;
+    }
+    void resetBoutonSauvegarde()
+    {
+        demanderSauvegarder=false;
+    }
+    boolean getBoutonQuitter()
+    {
+        return demanderQuitter;
+    }
+    void resetBoutonQuitter()
+    {
+        demanderQuitter=false;
+    }
+
     private Color getCouleurBarre(int val)
     {
         if (val!=0)
@@ -591,16 +614,45 @@ public class FenetreJeu extends JFrame{
             return new Color(255,0,0);
         }
     }
-    void resetDemanderSauvegarde()
-    {
-        demanderSauvegarder=false;
-    }
+
     void fermerFenetre()
     {
+        demanderQuitter=true;
         this.dispose();
     }
+
     boolean getActive()
     {
         return active;
+    }
+
+
+    void refresh(Personnage perso)
+    {
+        
+        textEtatPhys.setText("Etat physique : "+perso.getEtatPhys());
+
+        textEtatMoral.setText("Etat moral : "+perso.getEtatMoral());
+
+        int l=largeur*5/8;
+        int h=hauteur*1/2;
+
+        barre1.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(0)/100)), (int)(h*0.08-8));
+        barre1.setBackground(getCouleurBarre((int)perso.getCaracteristique(0)));
+
+        barre2.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(1)/100)), (int)(h*0.08-8));
+        barre2.setBackground(getCouleurBarre((int)perso.getCaracteristique(1)));
+
+        barre3.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(2)/100)), (int)(h*0.08-8));
+        barre3.setBackground(getCouleurBarre((int)perso.getCaracteristique(2)));
+
+        barre4.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(3)/100)), (int)(h*0.08-8));
+        barre4.setBackground(getCouleurBarre((int)perso.getCaracteristique(3)));
+
+        barre5.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(4)/100)), (int)(h*0.08-8));
+        barre5.setBackground(getCouleurBarre((int)perso.getCaracteristique(4)));
+
+        barre6.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(5)/100)), (int)(h*0.08-8));
+        barre6.setBackground(getCouleurBarre((int)perso.getCaracteristique(5)));
     }
 }

@@ -4,20 +4,20 @@ import java.util.concurrent.TimeUnit;
 public class Jeu {
 	private ArrayList<Piece> pieces;
 	private Personnage perso;
-	private Interface Iface;
+	private FenetreCreation fenCreat;
+    private FenetreJeu fenJeu;
 	Jeu()
 	{
 		
 		//FenetreLancement f=new FenetreLancement();
-		/*perso=Sauvegarde.charger();
+		//perso=Sauvegarde.charger();
 		perso=new Chien("Pipou");
 		pieces=new ArrayList<Piece>();
 		initPieces();
-		Interface Iface=new Interface("jeu", perso, pieces);
-		Iface.initFenetreCreation();
-		/*Iface.initFenetreJeu();
-		Sauvegarde.sauvegarder(perso);*/
+		fenJeu=new FenetreJeu(perso, pieces);
+		//Sauvegarde.sauvegarder(perso);
 		//initPerso();
+		simulation();
 	}
 	public void initPieces()
 	{
@@ -52,10 +52,11 @@ public class Jeu {
 		//jardin
 		pieces.get(5).addPieceAdja(pieces.get(0));
 	}
+
 	public void initPerso()
 	{
-		Iface.initFenetreCreation();
-		while(Iface.getActiveCreation())
+		fenCreat= new FenetreCreation();
+		while(fenCreat.getActive())
 		{	try
 			{
 				Thread.sleep(20);
@@ -65,7 +66,7 @@ public class Jeu {
 				Thread.currentThread().interrupt();
 			}
 		}
-		perso = Iface.getPersonnageCreation();
+		perso = fenCreat.getPersonnage();
 		System.out.println(perso.getNom());
 	}
 	public void changerPiece(Personnage perso, Piece p)
@@ -82,33 +83,42 @@ public class Jeu {
 			}
 		}
 	}
-	private void interact()
+	public void interact()
 	{
-		ArrayList<Boolean> b=Iface.getBoutonAppuye();
-		for(int i=0;i<b.size();i++)
-		{
-			if(b.get(i)==true)
-			{
-				System.out.println(b.get(i));
-			}
-		}
-	}
+		ArrayList<Boolean> b=fenJeu.getBoutonAppuye();
+		fenJeu.resetBoutonAppuye();
+		perso.setAllCaracteristiques(b);
 
-	private void sauvegarder()
-	{
-		Sauvegarde.sauvegarder(perso);
+		if(fenJeu.getBoutonSauvegarde())
+		{
+			Sauvegarde.sauvegarder(perso);
+			fenJeu.resetBoutonSauvegarde();
+		}
 	}
 
 	private void simulation()
 	{
-		interact();
-		try
+		for(int i=0;i<1200;i++)
 		{
-			TimeUnit.SECONDS.sleep(1);
-		}
-		catch (InterruptedException a)
-		{
-			System.out.println("Interruption");
+			System.out.println(i);
+			interact();
+			fenJeu.refresh(perso);
+
+
+			//bouton Quitter
+			if(fenJeu.getBoutonQuitter())
+			{
+				break;
+			}
+			//temporisation
+			try
+			{
+				TimeUnit.MILLISECONDS.sleep(50);
+			}
+			catch (InterruptedException a)
+			{
+				System.out.println("Interruption");
+			}
 		}
 	}
 }

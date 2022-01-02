@@ -1,7 +1,10 @@
 import java.time.LocalDate;
 import java.time.Period;
-
 import java.util.ArrayList;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.Arrays;
+
 
 public class Personnage {
 	private String nom;
@@ -12,6 +15,15 @@ public class Personnage {
 	private String etatPhysique;
 	private String etatMoral;
 	protected int type=1;
+
+	private ArrayList<Boolean> activeButton;
+	private ArrayList<Instant> activeButtonTime;
+
+	protected ArrayList<Duration> activeButtonMaxTime;
+	protected ArrayList<ArrayList<Double>> activeButtonSpeed;
+
+	protected ArrayList<Double> CaractTimeSpeed;
+
 	
 	public Personnage(String n)
 	{
@@ -27,6 +39,8 @@ public class Personnage {
 		caracteristiques.add(65.);
 		caracteristiques.add(85.);
 		caracteristiques.add(100.);
+		activeButton = new ArrayList<Boolean>(Arrays.asList(false,false,false,false,false,false));
+		activeButtonTime = new ArrayList<Instant>(Arrays.asList(Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now()));
 	}
 	
 	public String getNom()
@@ -67,7 +81,18 @@ public class Personnage {
     }
 	public void setCaracteristique(int n, double v)
 	{
-		caracteristiques.set(n,v);
+		if(v<=0.)
+		{
+			caracteristiques.set(n,0.);
+		}
+		else if(v>100)
+		{
+			caracteristiques.set(n,100.);
+		}
+		else
+		{
+			caracteristiques.set(n,v);
+		}
 	}
 	public double getCaracteristique(int n)
 	{
@@ -88,6 +113,25 @@ public class Personnage {
 		}
 		return retour;
 	}
+	public boolean getactiveButton(int n)
+	{
+		return activeButton.get(n);
+	}
+	public void setActiveButton(int n, boolean v)
+	{
+		activeButton.set(n,v);
+	}
+	public Instant getactiveButtonTime(int n)
+	{
+		return activeButtonTime.get(n);
+	}
+	public void setActiveButtonTime(int n, Instant v)
+	{
+		activeButtonTime.set(n,v);
+	}
+
+
+
 	public ArrayList<Integer> getAge()
 	{
 		LocalDate d=LocalDate.now();
@@ -115,4 +159,102 @@ public class Personnage {
 	{
 		etatMoral=s;
 	}
+	public void setAllCaracteristiques(ArrayList<Boolean> b)
+	{
+		//bouton actifs
+		if(b.get(0)==true)//manger
+		{			
+			setActiveButton(0, true);
+			setActiveButtonTime(0, Instant.now());
+		}
+		if(b.get(1)==true)//dormir
+		{
+			setActiveButton(1, true);
+			setActiveButton(2, false);
+			setActiveButtonTime(1, Instant.now());
+		}
+		if(b.get(2)==true)//reveiller
+		{
+			setActiveButton(2, true);
+			setActiveButton(1, false);
+			setActiveButtonTime(2, Instant.now());
+		}
+		if(b.get(3)==true)//laver
+		{
+			setActiveButton(3, true);
+			setActiveButtonTime(3, Instant.now());
+		}
+		if(b.get(4)==true)//toilettes
+		{
+			setActiveButton(4, true);
+			setActiveButtonTime(4, Instant.now());
+		}
+		if(b.get(5)==true)//jouer
+		{
+			setActiveButton(5, true);
+			setActiveButtonTime(5, Instant.now());
+		}
+
+		//evolution caracteristiques avec le temps
+
+		for(int i=0;i<6;i++)
+		{
+			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*0.05);
+		}
+
+		//evolution caracteristiques avec les boutons
+		for(int i=0;i<activeButton.size();i++)
+		{
+			if(activeButton.get(i))
+			{
+				if(Duration.between(activeButtonTime.get(i),Instant.now()).toSeconds()<activeButtonMaxTime.get(i).toSeconds())
+				{
+					for(int j=0;j<6;j++)
+					{
+						this.setCaracteristique(j, this.getCaracteristique(j)+activeButtonSpeed.get(i).get(j)*0.05);
+					}
+				}
+				else
+				{
+					activeButton.set(i,false);
+				}
+			}
+		}
+
+		//evolution de la vie
+		int nb=0;
+		for(int i=1;i<6;i++)
+		{
+			if(this.getCaracteristique(i)>80)
+			{
+				nb+=1;
+			}
+			if(this.getCaracteristique(i)<20)
+			{
+				nb-=1;
+			}
+		}
+		if(nb>=4)
+		{
+			this.setCaracteristique(0, this.getCaracteristique(0)+0.1);
+		}
+		else if(nb>=3)
+		{
+			this.setCaracteristique(0, this.getCaracteristique(0)+0.05);
+		}
+
+		else if(nb<=-4)
+		{
+			this.setCaracteristique(0, this.getCaracteristique(0)-0.1);
+		}
+		else if(nb<=-3)
+		{
+			this.setCaracteristique(0, this.getCaracteristique(0)-0.05);
+		}
+		
+
+	}
+
+
+
 }
