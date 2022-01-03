@@ -157,27 +157,27 @@ public class FenetreJeu extends JFrame{
     {
         if(perso.getPiece()==0)
         {
-            imagePiece=new ImageIcon("img/Pieces/salonFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(0));
         }
         if(perso.getPiece()==1)
         {
-            imagePiece=new ImageIcon("img/Pieces/cuisineFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(1));
         }
         if(perso.getPiece()==2)
         {
-            imagePiece=new ImageIcon("img/Pieces/chambreFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(2));
         }
         if(perso.getPiece()==3)
         {
-            imagePiece=new ImageIcon("img/Pieces/sdbFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(3));
         }
         if(perso.getPiece()==4)
         {
-            imagePiece=new ImageIcon("img/Pieces/toilettesFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(4));
         }
         if(perso.getPiece()==5)
         {
-            imagePiece=new ImageIcon("img/Pieces/jardinFond.png");
+            imagePiece=new ImageIcon(perso.getFichiersPieces(5));
         }
     }
 
@@ -384,8 +384,8 @@ public class FenetreJeu extends JFrame{
         image6Label.setBounds((int)(l*0.3-24),(int)(h*0.8),24,24);
         panneau3.add(image6Label);
 
-        boutonManger=new JButton("Manger");
-        boutonManger.setBounds((int)(l*0.3+l*0.5), (int)(h*0.2), 90, 24);
+        boutonManger=new JButton(perso.getNomActions(0));
+        boutonManger.setBounds((int)(l*0.3+l*0.5), (int)(h*0.2), 100, 24);
         panneau3.add(boutonManger);
 
         boutonManger.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
@@ -393,8 +393,8 @@ public class FenetreJeu extends JFrame{
                 boutonAppuye.set(0,true);
             }});
 
-        boutonDormir=new JButton("Dormir");
-        boutonDormir.setBounds((int)(l*0.3+l*0.5), (int)(h*0.35), 90, 24);
+        boutonDormir=new JButton(perso.getNomActions(1));
+        boutonDormir.setBounds((int)(l*0.3+l*0.5), (int)(h*0.35), 100, 24);
         panneau3.add(boutonDormir);
 
         boutonDormir.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
@@ -404,8 +404,8 @@ public class FenetreJeu extends JFrame{
                 boutonAppuye.set(1,true);
             }});
 
-        boutonReveiller=new JButton("Reveiller");
-        boutonReveiller.setBounds((int)(l*0.3+l*0.5), (int)(h*0.35), 90, 24);
+        boutonReveiller=new JButton(perso.getNomActions(2));
+        boutonReveiller.setBounds((int)(l*0.3+l*0.5), (int)(h*0.35), 100, 24);
         boutonReveiller.setVisible(false);
         panneau3.add(boutonReveiller);
 
@@ -416,8 +416,8 @@ public class FenetreJeu extends JFrame{
                 boutonAppuye.set(2,true);
             }});
 
-        boutonLaver=new JButton("Se laver");
-        boutonLaver.setBounds((int)(l*0.3+l*0.5), (int)(h*0.5), 90, 24);
+        boutonLaver=new JButton(perso.getNomActions(3));
+        boutonLaver.setBounds((int)(l*0.3+l*0.5), (int)(h*0.5), 100, 24);
         panneau3.add(boutonLaver);
 
         boutonLaver.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
@@ -425,8 +425,8 @@ public class FenetreJeu extends JFrame{
                 boutonAppuye.set(3,true);
             }});
 
-        boutonAllerToilettes=new JButton("Toilettes");
-        boutonAllerToilettes.setBounds((int)(l*0.3+l*0.5), (int)(h*0.65), 90, 24);
+        boutonAllerToilettes=new JButton(perso.getNomActions(4));
+        boutonAllerToilettes.setBounds((int)(l*0.3+l*0.5), (int)(h*0.65), 100, 24);
         panneau3.add(boutonAllerToilettes);
 
         boutonAllerToilettes.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
@@ -434,8 +434,8 @@ public class FenetreJeu extends JFrame{
                 boutonAppuye.set(4,true);
             }});
 
-        boutonJouer=new JButton("Jouer");
-        boutonJouer.setBounds((int)(l*0.3+l*0.5), (int)(h*0.8), 90, 24);
+        boutonJouer=new JButton(perso.getNomActions(5));
+        boutonJouer.setBounds((int)(l*0.3+l*0.5), (int)(h*0.8), 100, 24);
         panneau3.add(boutonJouer);
 
         boutonJouer.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)

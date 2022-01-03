@@ -13,11 +13,6 @@ public class Jeu {
 		initPieces();
 
 		lancement();
-
-		//perso=Sauvegarde.charger();
-		//fenJeu=new FenetreJeu(perso, pieces);
-		//initPerso();
-		//simulation();
 	}
 	public void initPieces()
 	{
@@ -38,15 +33,11 @@ public class Jeu {
 		//cuisine
 		pieces.get(1).addPieceAdja(pieces.get(0));
 
-
 		//chambre
 		pieces.get(2).addPieceAdja(pieces.get(0));
 
-
 		//salle de bain
 		pieces.get(3).addPieceAdja(pieces.get(0));
-		pieces.get(3).addPieceAdja(pieces.get(2));
-
 
 		//toilettes
 		pieces.get(4).addPieceAdja(pieces.get(0));
@@ -69,7 +60,7 @@ public class Jeu {
 			}
 		}
 		perso = fenCreat.getPersonnage();
-		System.out.println(perso.getNom());
+		Sauvegarde.sauvegarder(perso);
 	}
 
 	private void lancement()
