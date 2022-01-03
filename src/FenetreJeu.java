@@ -135,21 +135,13 @@ public class FenetreJeu extends JFrame{
     
     void selectImagePerso(Personnage perso)
     {
-        if(perso instanceof Chien)
+        if (perso.getactiveButton(1))//animal endormi ou robot en charge
         {
-            imagePerso=new ImageIcon("img/Personnages/chien.gif");
+            imagePerso=new ImageIcon(perso.getFichiersPersonnages(1));
         }
-        else if(perso instanceof Chat)
+        else
         {
-            imagePerso=new ImageIcon("img/Personnages/chat.gif");
-        }
-        else if(perso instanceof Lapin)
-        {
-            imagePerso=new ImageIcon("img/Personnages/lapin.gif");
-        }
-        else if(perso instanceof Robot)
-        {
-            imagePerso=new ImageIcon("img/Personnages/robot.gif");
+            imagePerso=new ImageIcon(perso.getFichiersPersonnages(0));
         }
     }
 
@@ -630,6 +622,8 @@ public class FenetreJeu extends JFrame{
 
     void refresh(Personnage perso)
     {
+        selectImagePerso(perso);
+        imagePersoLabel.setIcon(imagePerso);
         selectImagePiece(perso);
         imagePieceLabel.setIcon(imagePiece);
 

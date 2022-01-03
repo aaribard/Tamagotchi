@@ -26,6 +26,7 @@ public class Personnage {
 
 	protected ArrayList<String> fichiersCaracteristiques;
 	protected ArrayList<String> fichiersPieces;
+	protected ArrayList<String> fichiersPersonnages;
 
 	protected ArrayList<String> nomActions;
 
@@ -126,6 +127,10 @@ public class Personnage {
 	public String getFichiersPieces(int i)
 	{
 		return fichiersPieces.get(i);
+	}
+	public String getFichiersPersonnages(int i)
+	{
+		return fichiersPersonnages.get(i);
 	}
 	public String getNomActions(int i)
 	{

@@ -11,6 +11,7 @@ public class Robot extends Personnage{
         super.nomActions=new ArrayList<String>(Arrays.asList("Entretenir", "Recharger", "Débrancher","Nettoyer","Vidanger","Jouer"));
         super.nomCaracteristiques=new ArrayList<String>(Arrays.asList("Vie","Integrité","Batterie","Propreté","Huile","Moral"));
         super.fichiersCaracteristiques=new ArrayList<String>(Arrays.asList("img/LogoBarres/vie2Logo.png","img/LogoBarres/integriteLogo.png","img/LogoBarres/batterieLogo.png","img/LogoBarres/propreteLogo.png","img/LogoBarres/huileLogo.png","img/LogoBarres/moralLogo.png"));
+        super.fichiersPersonnages=new ArrayList<String>(Arrays.asList("img/Personnages/robot.gif","img/Personnages/robotDodo.gif"));
         super.fichiersPieces=new ArrayList<String>(Arrays.asList("img/Pieces/courFond.png","img/Pieces/atlierFond.png","img/Pieces/centraleFond.png","img/Pieces/stationFond.png","img/Pieces/garageFond.png","img/Pieces/salleFond.png"));
         //     -----     duree max modifieur     -----
         super.activeButtonMaxTime = new ArrayList<Duration>();
@@ -31,7 +32,7 @@ public class Robot extends Personnage{
         super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-1.,-1.,0.,3.)));//Moral
 
         //     -----     vitesse de l'effet du temps     -----
-        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-0.1,-0.1,-0.1,-0.1,-0.1)));//manger
+        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-0.1,-0.1,-0.1,-0.1,-0.1)));
     }
     
 }
