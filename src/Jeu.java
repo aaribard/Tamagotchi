@@ -4,20 +4,20 @@ import java.util.concurrent.TimeUnit;
 public class Jeu {
 	private ArrayList<Piece> pieces;
 	private Personnage perso;
+	private FenetreLancement fenLanc;
 	private FenetreCreation fenCreat;
     private FenetreJeu fenJeu;
 	Jeu()
 	{
-		
-		//FenetreLancement f=new FenetreLancement();
-		//perso=Sauvegarde.charger();
-		perso=new Chien("Pipou");
 		pieces=new ArrayList<Piece>();
 		initPieces();
-		fenJeu=new FenetreJeu(perso, pieces);
-		//Sauvegarde.sauvegarder(perso);
+
+		lancement();
+
+		//perso=Sauvegarde.charger();
+		//fenJeu=new FenetreJeu(perso, pieces);
 		//initPerso();
-		simulation();
+		//simulation();
 	}
 	public void initPieces()
 	{
@@ -31,6 +31,7 @@ public class Jeu {
 		//salon
 		pieces.get(0).addPieceAdja(pieces.get(1));
 		pieces.get(0).addPieceAdja(pieces.get(2));
+		pieces.get(0).addPieceAdja(pieces.get(3));
 		pieces.get(0).addPieceAdja(pieces.get(4));
 		pieces.get(0).addPieceAdja(pieces.get(5));
 
@@ -40,11 +41,12 @@ public class Jeu {
 
 		//chambre
 		pieces.get(2).addPieceAdja(pieces.get(0));
-		pieces.get(2).addPieceAdja(pieces.get(3));
 
 
 		//salle de bain
+		pieces.get(3).addPieceAdja(pieces.get(0));
 		pieces.get(3).addPieceAdja(pieces.get(2));
+
 
 		//toilettes
 		pieces.get(4).addPieceAdja(pieces.get(0));
@@ -69,20 +71,41 @@ public class Jeu {
 		perso = fenCreat.getPersonnage();
 		System.out.println(perso.getNom());
 	}
-	public void changerPiece(Personnage perso, Piece p)
+
+	private void lancement()
 	{
-		if(perso.getPiece()!=p.getId())
+		fenLanc=new FenetreLancement();
+		while(fenLanc.getActive()==true)
 		{
-			for(int i=0;i<p.getNbPieces();i++)
+			try
 			{
-				if(perso.getPiece()==p.getPieceAdja().get(i).getId())
-				{
-					perso.setPiece(p.getId());
-					break;
-				}
+				TimeUnit.MILLISECONDS.sleep(50);
+			}
+			catch (InterruptedException a)
+			{
+				System.out.println("Interruption");
 			}
 		}
+		if(fenLanc.getFermeture()==1)
+		{
+			System.out.println("Fermeture Bouton Quitter");
+		}
+		else if(fenLanc.getFermeture()==2)
+		{
+			System.out.println("Nouvelle Partie");
+			initPerso();
+			fenJeu=new FenetreJeu(perso, pieces);
+			simulation();
+		}
+		else if(fenLanc.getFermeture()==3)
+		{
+			System.out.println("Charger Partie - "+fenLanc.getFileToStart());
+			perso=Sauvegarde.charger(fenLanc.getFileToStart());
+			fenJeu=new FenetreJeu(perso, pieces);
+			simulation();
+		}
 	}
+
 	public void interact()
 	{
 		ArrayList<Boolean> b=fenJeu.getBoutonAppuye();
@@ -100,10 +123,8 @@ public class Jeu {
 	{
 		for(int i=0;i<1200;i++)
 		{
-			System.out.println(i);
 			interact();
 			fenJeu.refresh(perso);
-
 
 			//bouton Quitter
 			if(fenJeu.getBoutonQuitter())

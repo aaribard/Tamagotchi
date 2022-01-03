@@ -24,6 +24,8 @@ public class Personnage {
 
 	protected ArrayList<Double> CaractTimeSpeed;
 
+	protected ArrayList<String> fichiersCaracteristiques;
+
 	
 	public Personnage(String n)
 	{
@@ -113,6 +115,12 @@ public class Personnage {
 		}
 		return retour;
 	}
+
+	public String getFichiersCaracteristique(int i)
+	{
+		return fichiersCaracteristiques.get(i);
+	}
+
 	public boolean getactiveButton(int n)
 	{
 		return activeButton.get(n);

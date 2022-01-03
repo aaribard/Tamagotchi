@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,12 +71,12 @@ public class FenetreJeu extends JFrame{
 
     JLabel imagePlanLabel;
 
-    JButton boutonSalon;
-    JButton boutonCuisine;
-    JButton boutonChambre;
-    JButton boutonSdb;
-    JButton boutonToilettes;
-    JButton boutonJardin;
+    JLabel boutonSalon;
+    JLabel boutonCuisine;
+    JLabel boutonChambre;
+    JLabel boutonSdb;
+    JLabel boutonToilettes;
+    JLabel boutonJardin;
 
     boolean demanderSauvegarder=false;
     boolean demanderQuitter=false;
@@ -136,19 +137,19 @@ public class FenetreJeu extends JFrame{
     {
         if(perso instanceof Chien)
         {
-            imagePerso=new ImageIcon("img/chien.gif");
+            imagePerso=new ImageIcon("img/Personnages/chien.gif");
         }
         else if(perso instanceof Chat)
         {
-            imagePerso=new ImageIcon("img/chat.gif");
+            imagePerso=new ImageIcon("img/Personnages/chat.gif");
         }
         else if(perso instanceof Lapin)
         {
-            imagePerso=new ImageIcon("img/lapin.gif");
+            imagePerso=new ImageIcon("img/Personnages/lapin.gif");
         }
         else if(perso instanceof Robot)
         {
-            imagePerso=new ImageIcon("img/robot.gif");
+            imagePerso=new ImageIcon("img/Personnages/robot.gif");
         }
     }
 
@@ -156,27 +157,27 @@ public class FenetreJeu extends JFrame{
     {
         if(perso.getPiece()==0)
         {
-            imagePiece=new ImageIcon("img/salonFond.png");
+            imagePiece=new ImageIcon("img/Pieces/salonFond.png");
         }
         if(perso.getPiece()==1)
         {
-            imagePiece=new ImageIcon("img/cuisineFond.png");
+            imagePiece=new ImageIcon("img/Pieces/cuisineFond.png");
         }
         if(perso.getPiece()==2)
         {
-            imagePiece=new ImageIcon("img/chambreFond.png");
+            imagePiece=new ImageIcon("img/Pieces/chambreFond.png");
         }
         if(perso.getPiece()==3)
         {
-            imagePiece=new ImageIcon("img/sdbFond.png");
+            imagePiece=new ImageIcon("img/Pieces/sdbFond.png");
         }
         if(perso.getPiece()==4)
         {
-            imagePiece=new ImageIcon("img/toilettesFond.png");
+            imagePiece=new ImageIcon("img/Pieces/toilettesFond.png");
         }
         if(perso.getPiece()==5)
         {
-            imagePiece=new ImageIcon("img/jardinFond.png");
+            imagePiece=new ImageIcon("img/Pieces/jardinFond.png");
         }
     }
 
@@ -359,27 +360,27 @@ public class FenetreJeu extends JFrame{
 
 /*     -----     Affichage des icones barres des caracteristiques     -----     */
 
-        image1Label=new JLabel(new ImageIcon("img/vieLogo.png"));
+        image1Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(0)));
         image1Label.setBounds((int)(l*0.3-24),(int)(h*0.05),24,24);
         panneau3.add(image1Label);
 
-        image2Label=new JLabel(new ImageIcon("img/nourritureLogo.png"));
+        image2Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(1)));
         image2Label.setBounds((int)(l*0.3-24),(int)(h*0.2),24,24);
         panneau3.add(image2Label);
 
-        image3Label=new JLabel(new ImageIcon("img/energieLogo.png"));
+        image3Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(2)));
         image3Label.setBounds((int)(l*0.3-24),(int)(h*0.35),24,24);
         panneau3.add(image3Label);
 
-        image4Label=new JLabel(new ImageIcon("img/hygieneLogo.png"));
+        image4Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(3)));
         image4Label.setBounds((int)(l*0.3-24),(int)(h*0.5),24,24);
         panneau3.add(image4Label);
 
-        image5Label=new JLabel(new ImageIcon("img/toilettesLogo.png"));
+        image5Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(4)));
         image5Label.setBounds((int)(l*0.3-24),(int)(h*0.65),24,24);
         panneau3.add(image5Label);
 
-        image6Label=new JLabel(new ImageIcon("img/moralLogo.png"));
+        image6Label=new JLabel(new ImageIcon(perso.getFichiersCaracteristique(5)));
         image6Label.setBounds((int)(l*0.3-24),(int)(h*0.8),24,24);
         panneau3.add(image6Label);
 
@@ -445,80 +446,80 @@ public class FenetreJeu extends JFrame{
 
     private void affichagePanneau4(Personnage perso, ArrayList<Piece> pieces)
     {
-        boutonSalon=new JButton(new ImageIcon("img/fleche.png"));
-        boutonSalon.setBounds(50, 220, 20, 20);
+        boutonSalon=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonSalon.setBounds(90, 180, 24, 24);
         panneau4.add(boutonSalon);
 
-        boutonSalon.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonSalon.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(0);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        boutonCuisine=new JButton(new ImageIcon("img/fleche.png"));
-        boutonCuisine.setBounds(150, 150, 20, 20);
+        boutonCuisine=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonCuisine.setBounds(20, 220, 24, 24);
         panneau4.add(boutonCuisine);
 
-        boutonCuisine.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonCuisine.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(1);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        boutonChambre=new JButton(new ImageIcon("img/fleche.png"));
-        boutonChambre.setBounds(20, 20, 20, 20);
+        boutonChambre=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonChambre.setBounds(160, 200, 24, 24);
         panneau4.add(boutonChambre);
 
-        boutonChambre.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonChambre.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(2);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        boutonSdb=new JButton(new ImageIcon("img/fleche.png"));
-        boutonSdb.setBounds(130, 20, 20, 20);
+        boutonSdb=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonSdb.setBounds(160, 150, 24, 24);
         panneau4.add(boutonSdb);
 
-        boutonSdb.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonSdb.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(3);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        boutonToilettes=new JButton(new ImageIcon("img/fleche.png"));
-        boutonToilettes.setBounds(250, 130, 20, 20);
+        boutonToilettes=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonToilettes.setBounds(160, 105, 24, 24);
         panneau4.add(boutonToilettes);
 
-        boutonToilettes.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonToilettes.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(4);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        boutonJardin=new JButton(new ImageIcon("img/fleche.png"));
-        boutonJardin.setBounds(200, 20, 20, 20);
+        boutonJardin=new JLabel(new ImageIcon("img/Plan/fleche.png"));
+        boutonJardin.setBounds(90, 65, 24, 24);
         panneau4.add(boutonJardin);
 
-        boutonJardin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+        boutonJardin.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
             {
                 perso.setPiece(5);
                 boutonPieceSetVisible(perso, pieces);
                 boutonActionSetVisible(perso);
             }});
 
-        imagePlanLabel=new JLabel(new ImageIcon("img/PlanMaison.png"));
+        imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanMaison.png"));
         imagePlanLabel.setBounds(0,0,300,300);
         panneau4.add(imagePlanLabel);
     }
 
     void boutonPieceSetVisible(Personnage perso, ArrayList<Piece> pieces)
     {
-        JButton[] boutonPieceListe = {boutonSalon, boutonCuisine, boutonChambre, boutonSdb, boutonToilettes, boutonJardin};
+        JLabel[] boutonPieceListe = {boutonSalon, boutonCuisine, boutonChambre, boutonSdb, boutonToilettes, boutonJardin};
         for(int i=0;i<boutonPieceListe.length;i++)
         {
             if(i==perso.getPiece())
@@ -629,7 +630,9 @@ public class FenetreJeu extends JFrame{
 
     void refresh(Personnage perso)
     {
-        
+        selectImagePiece(perso);
+        imagePieceLabel.setIcon(imagePiece);
+
         textEtatPhys.setText("Etat physique : "+perso.getEtatPhys());
 
         textEtatMoral.setText("Etat moral : "+perso.getEtatMoral());

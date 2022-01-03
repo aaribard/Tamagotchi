@@ -18,18 +18,16 @@ public class Sauvegarde {
                 txtSauv.flush();
                 txtSauv.close();
             }
-            
             catch (java.io.IOException e) {e.printStackTrace();}
     }
    
-   
-    public static Personnage charger()
+    public static Personnage charger(String fileName)
     {
         BufferedReader lect ;
         Personnage perso;
         try
         {
-            lect = new BufferedReader(new FileReader("save/Pipou10_11_2021.txt" )) ;
+            lect = new BufferedReader(new FileReader("save/"+fileName)) ;
             String nom=lect.readLine();
             int type=Integer.parseInt(lect.readLine());
             int annee=Integer.parseInt(lect.readLine());

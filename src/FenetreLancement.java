@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.*;
-import java.util.List;
 import java.util.ArrayList;
 import java.io.*;
 
@@ -25,10 +24,14 @@ public class FenetreLancement extends JFrame{
     JButton flecheChargerPartieDroite;
     JButton flecheChargerPartieGauche;
 
+    int fileOffset=0;
 
     JLabel texteChargerPartie;
     JButton boutonQuitter;
     boolean active;
+    int fermeture=0; // 1=Bouton quitter // 2=Nouvelle partie // 3=Charger partie
+
+    String fileToStart;
 
 
     FenetreLancement()
@@ -38,6 +41,7 @@ public class FenetreLancement extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         active = true;
+
         panneau1 = new JPanel();
         panneau1.setBounds(0,0,400,50);
         panneau1.setBackground(Color.red);
@@ -65,8 +69,10 @@ public class FenetreLancement extends JFrame{
         boutonNouvellePartie.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
 
         boutonNouvellePartie.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
-            {
-        
+            {   
+                fermeture=2;
+                active=false;
+                fermerFenetre();
             }});
         panneau2.add(boutonNouvellePartie);
 
@@ -85,7 +91,8 @@ public class FenetreLancement extends JFrame{
         boutonChargerPartie1.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
         boutonChargerPartie1.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
             {
-        
+                fermeture=3;
+                setFileToStart(1);
             }});
         panneau3.add(boutonChargerPartie1);
         }
@@ -96,7 +103,8 @@ public class FenetreLancement extends JFrame{
             boutonChargerPartie2.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
             boutonChargerPartie2.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-            
+                    fermeture=3;
+                    setFileToStart(2);
                 }});
             panneau3.add(boutonChargerPartie2);
         }
@@ -107,7 +115,8 @@ public class FenetreLancement extends JFrame{
             boutonChargerPartie3.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
             boutonChargerPartie3.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-            
+                    fermeture=3;
+                    setFileToStart(3);
                 }});
             panneau3.add(boutonChargerPartie3);
         }
@@ -118,7 +127,8 @@ public class FenetreLancement extends JFrame{
             boutonChargerPartie4.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
             boutonChargerPartie4.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-            
+                    fermeture=3;
+                    setFileToStart(4);
                 }});
             panneau3.add(boutonChargerPartie4);
         }
@@ -128,19 +138,34 @@ public class FenetreLancement extends JFrame{
             flecheChargerPartieDroite.setBounds(380,50,20,100);
             flecheChargerPartieDroite.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-            
+                    fileOffset+=1;
+                    refreshBoutonCharger();
                 }});
 
             flecheChargerPartieGauche = new JButton();
             flecheChargerPartieGauche.setBounds(0,50,20,100);
             flecheChargerPartieGauche.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-            
+                    if(fileOffset>0)
+                    {
+                        fileOffset-=1;
+                    }
+                    refreshBoutonCharger();
                 }});
 
             panneau3.add(flecheChargerPartieDroite);
             panneau3.add(flecheChargerPartieGauche);
         }
+        boutonQuitter = new JButton("Quitter");
+        boutonQuitter.setBounds(300,0,100,50);
+        boutonQuitter.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
+        boutonQuitter.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+            {
+                fermeture=1;
+                active=false;
+                fermerFenetre();
+            }});
+        panneau4.add(boutonQuitter);
 
 
         this.add(panneau1);
@@ -160,10 +185,23 @@ public class FenetreLancement extends JFrame{
     {
         return active;
     }
-
-    void commencerPartie(String nomFichier)
+    int getFermeture()
     {
-        
+        return fermeture;
+    }
+
+    void setFileToStart(int id)
+    {
+        File repertoire = new File("save");
+        String liste[] = repertoire.list();      
+        fileToStart=liste[id+fileOffset-1];
+        active=false;
+        fermerFenetre();
+    }
+
+    String getFileToStart()
+    {
+        return fileToStart;
     }
 
     ArrayList<String[]> getListeSauvegardes() 
@@ -174,7 +212,7 @@ public class FenetreLancement extends JFrame{
  
         if (liste != null) 
         {         
-            for (int i = 0; i < liste.length; i++) 
+            for (int i = fileOffset; i < liste.length; i++) 
             {
                 String[] splitDot = liste[i].split("\\.");//decouper au point pour enlever ".txt"
                 String[] elemNom = splitDot[0].split("_");//decouper aux "_"
@@ -188,6 +226,36 @@ public class FenetreLancement extends JFrame{
         return listeSauvegardes;
     }
 
+    void refreshBoutonCharger()
+    {
+        ArrayList<String[]> e = getListeSauvegardes();
+        boutonChargerPartie1.setVisible(false);
+        boutonChargerPartie2.setVisible(false);
+        boutonChargerPartie3.setVisible(false);
+        boutonChargerPartie4.setVisible(false);
+
+        if(e.size()>=1)
+        {
+            boutonChargerPartie1.setText("<html>"+e.get(0)[0]+"<br/>"+e.get(0)[1]+"/"+e.get(0)[2]+"/"+e.get(0)[3]+"</html>");
+            boutonChargerPartie1.setVisible(true);
+        }
+        if(e.size()>=2)
+        {
+            boutonChargerPartie2.setText("<html>"+e.get(1)[0]+"<br/>"+e.get(1)[1]+"/"+e.get(1)[2]+"/"+e.get(1)[3]+"</html>");
+            boutonChargerPartie2.setVisible(true);
+        }
+        if(e.size()>=3)
+        {
+            boutonChargerPartie3.setText("<html>"+e.get(2)[0]+"<br/>"+e.get(2)[1]+"/"+e.get(2)[2]+"/"+e.get(2)[3]+"</html>");
+            boutonChargerPartie3.setVisible(true);
+        }
+        if(e.size()>=4)
+        {
+            boutonChargerPartie4.setText("<html>"+e.get(3)[0]+"<br/>"+e.get(3)[1]+"/"+e.get(3)[2]+"/"+e.get(3)[3]+"</html>");
+            boutonChargerPartie4.setVisible(true);
+        }
+        panneau3.repaint();
+    }
 
 
 
