@@ -215,12 +215,12 @@ public class FenetreJeu extends JFrame{
         panneau2.add(textAgeJours);
 
         textEtatPhys =new JLabel("Etat physique : "+perso.getEtatPhys());
-        textEtatPhys.setFont(new Font("Bookman Old Style", Font.PLAIN, 16));
+        textEtatPhys.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
         textEtatPhys.setBounds((int)(l*0.2),(int)(h*0.6),200,20);
         panneau2.add(textEtatPhys);
 
         textEtatMoral =new JLabel("Etat moral : "+perso.getEtatMoral());
-        textEtatMoral.setFont(new Font("Bookman Old Style", Font.PLAIN, 16));
+        textEtatMoral.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
         textEtatMoral.setBounds((int)(l*0.2),(int)(h*0.6+20),200,20);
         panneau2.add(textEtatMoral);
 
@@ -504,7 +504,14 @@ public class FenetreJeu extends JFrame{
                 boutonActionSetVisible(perso);
             }});
 
-        imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanMaison.png"));
+        if(perso instanceof Animal)
+        {
+            imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanMaison.png"));
+        }
+        else if(perso instanceof Robot)
+        {
+            imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanUsine.png"));
+        }
         imagePlanLabel.setBounds(0,0,300,300);
         panneau4.add(imagePlanLabel);
     }

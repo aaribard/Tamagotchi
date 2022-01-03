@@ -5,6 +5,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 
+import javax.lang.model.util.ElementScanner6;
+
 
 public class Personnage {
 	private String nom;
@@ -275,7 +277,23 @@ public class Personnage {
 		{
 			this.setCaracteristique(0, this.getCaracteristique(0)-0.05);
 		}
-		
+		//evolution de l'etat physique
+		if(this.getCaracteristique(2)<30)
+		{
+			etatPhysique="Fatigué";
+		}
+		else if(this.getCaracteristique(2)<10)
+		{
+			etatPhysique="Exténué";
+		}
+		else if(this.getCaracteristique(2)>80)
+		{
+			etatPhysique="En pleine forme";
+		}
+		else
+		{
+			etatPhysique="En forme";
+		}
 
 	}
 
