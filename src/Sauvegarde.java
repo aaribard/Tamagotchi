@@ -17,6 +17,7 @@ public class Sauvegarde {
                 txtSauv.println(perso.getPiece());
                 txtSauv.flush();
                 txtSauv.close();
+                System.out.println("Sauvegarde effectuée - "+nomFichier);
             }
             catch (java.io.IOException e) {e.printStackTrace();}
     }
