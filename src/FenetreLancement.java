@@ -58,11 +58,15 @@ public class FenetreLancement extends JFrame{
         panneau4.setBackground(Color.black);
         panneau4.setLayout(null);
 
+        //     -----     panneau 1     -----     
+        
         texteQuestion =new JLabel("<html>Voulez vous charger un partie existante <br/>ou commencer une nouvelle?</html>"); 
         texteQuestion.setBounds(0,0,400,50);
         texteQuestion.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
 
         panneau1.add(texteQuestion);
+
+        //     -----     panneau 2     -----     
 
         boutonNouvellePartie = new JButton("Nouvelle partie");
         boutonNouvellePartie.setBounds(0,0,400,50);
@@ -75,6 +79,8 @@ public class FenetreLancement extends JFrame{
                 fermerFenetre();
             }});
         panneau2.add(boutonNouvellePartie);
+
+        //     -----     panneau 3     -----     
 
         texteChargerPartie = new JLabel("Charger partie", JLabel.CENTER);
         texteChargerPartie.setBounds(0,0,400,50);
@@ -132,13 +138,13 @@ public class FenetreLancement extends JFrame{
                 }});
             panneau3.add(boutonChargerPartie4);
         }
-        if(e.size()>4)
+        if(e.size()>4)//si il y a plus de 4 fichiers, les fleches sont ajoutées
         {
             flecheChargerPartieDroite = new JButton();
             flecheChargerPartieDroite.setBounds(380,50,20,100);
             flecheChargerPartieDroite.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-                    fileOffset+=4;
+                    fileOffset+=4;//decalage de 4 fichiers vers la droite 
                     refreshBoutonCharger();
                 }});
 
@@ -148,7 +154,7 @@ public class FenetreLancement extends JFrame{
                 {
                     if(fileOffset>0)
                     {
-                        fileOffset-=4;
+                        fileOffset-=4;//decalage de 4 fichiers vers la gauche 
                     }
                     refreshBoutonCharger();
                 }});
@@ -156,6 +162,9 @@ public class FenetreLancement extends JFrame{
             panneau3.add(flecheChargerPartieDroite);
             panneau3.add(flecheChargerPartieGauche);
         }
+
+        //     -----     panneau 4     -----     
+
         boutonQuitter = new JButton("Quitter");
         boutonQuitter.setBounds(300,0,100,50);
         boutonQuitter.setFont(new Font("Bookman Old Style", Font.PLAIN, 14));
@@ -185,12 +194,12 @@ public class FenetreLancement extends JFrame{
     {
         return active;
     }
-    int getFermeture()
+    int getFermeture()//recupere la raison de la fermeture
     {
         return fermeture;
     }
 
-    void setFileToStart(int id)
+    void setFileToStart(int id)//choisi le fichier a lancer en fonction du bouton appuyé
     {
         File repertoire = new File("save");
         String liste[] = repertoire.list();      
@@ -204,7 +213,7 @@ public class FenetreLancement extends JFrame{
         return fileToStart;
     }
 
-    ArrayList<String[]> getListeSauvegardes() 
+    ArrayList<String[]> getListeSauvegardes() //recupere les fichiers .txt dans le dossier save
     {
         ArrayList<String[]> listeSauvegardes=new ArrayList<String[]>();
         File repertoire = new File("save");
@@ -234,17 +243,17 @@ public class FenetreLancement extends JFrame{
         boutonChargerPartie3.setVisible(false);
         boutonChargerPartie4.setVisible(false);
 
-        if(e.size()>=1)
+        if(e.size()>=1)//si il y a seulement 1 fichier
         {
             boutonChargerPartie1.setText("<html>"+e.get(0)[0]+"<br/>"+e.get(0)[1]+"/"+e.get(0)[2]+"/"+e.get(0)[3]+"</html>");
             boutonChargerPartie1.setVisible(true);
         }
-        if(e.size()>=2)
+        if(e.size()>=2)//si il y a seulement 2 fichier
         {
             boutonChargerPartie2.setText("<html>"+e.get(1)[0]+"<br/>"+e.get(1)[1]+"/"+e.get(1)[2]+"/"+e.get(1)[3]+"</html>");
             boutonChargerPartie2.setVisible(true);
         }
-        if(e.size()>=3)
+        if(e.size()>=3)//etc
         {
             boutonChargerPartie3.setText("<html>"+e.get(2)[0]+"<br/>"+e.get(2)[1]+"/"+e.get(2)[2]+"/"+e.get(2)[3]+"</html>");
             boutonChargerPartie3.setVisible(true);

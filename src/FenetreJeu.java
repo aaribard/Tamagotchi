@@ -47,7 +47,6 @@ public class FenetreJeu extends JFrame{
     JPanel barre5;
     JPanel barre6;
 
-
     JLabel titreBarre1;
     JLabel titreBarre2;
     JLabel titreBarre3;
@@ -80,7 +79,7 @@ public class FenetreJeu extends JFrame{
 
     boolean demanderSauvegarder=false;
     boolean demanderQuitter=false;
-    ArrayList<Boolean> boutonAppuye;
+    ArrayList<Boolean> boutonAppuye;    //liste des boutons appuyés
 
     FenetreJeu(Personnage perso, ArrayList<Piece> pieces)
     {
@@ -133,7 +132,7 @@ public class FenetreJeu extends JFrame{
         this.setVisible(true);
     }
     
-    void selectImagePerso(Personnage perso)
+    private void selectImagePerso(Personnage perso)     //choix de l'image du personnage(si il dort ou pas)
     {
         if (perso.getactiveButton(1))//animal endormi ou robot en charge
         {
@@ -145,7 +144,7 @@ public class FenetreJeu extends JFrame{
         }
     }
 
-    void selectImagePiece(Personnage perso)
+    private void selectImagePiece(Personnage perso)     //choix de l'image de fond de la piece
     {
         if(perso.getPiece()==0)
         {
@@ -173,7 +172,9 @@ public class FenetreJeu extends JFrame{
         }
     }
 
-    public void affichagePanneau1(Personnage perso)
+//                  ---------------              panneau 1                  ---------------    
+
+    private void affichagePanneau1(Personnage perso)
     {
         selectImagePerso(perso);
 
@@ -188,7 +189,9 @@ public class FenetreJeu extends JFrame{
         panneau1.add(imagePieceLabel);
     }
 
-    void affichagePanneau2(Personnage perso)
+//                  ---------------              panneau 2                  ---------------              
+
+    private void affichagePanneau2(Personnage perso)
     {
         int l=largeur*3/8;
         int h=hauteur*1/2;
@@ -243,7 +246,9 @@ public class FenetreJeu extends JFrame{
             }});
     }
 
-    void affichagePanneau3(Personnage perso)
+//                  ---------------              panneau 3                  ---------------              
+
+    private void affichagePanneau3(Personnage perso)
     {
         int l=largeur*5/8;
         int h=hauteur*1/2;
@@ -436,6 +441,8 @@ public class FenetreJeu extends JFrame{
             }});
     }
 
+//                  ---------------              panneau 4                  ---------------              
+
     private void affichagePanneau4(Personnage perso, ArrayList<Piece> pieces)
     {
         boutonSalon=new JLabel(new ImageIcon("img/Plan/fleche.png"));
@@ -516,7 +523,7 @@ public class FenetreJeu extends JFrame{
         panneau4.add(imagePlanLabel);
     }
 
-    void boutonPieceSetVisible(Personnage perso, ArrayList<Piece> pieces)
+    void boutonPieceSetVisible(Personnage perso, ArrayList<Piece> pieces)//selection des boutons de déplacement à afficher en fonction des pieces adjacentes
     {
         JLabel[] boutonPieceListe = {boutonSalon, boutonCuisine, boutonChambre, boutonSdb, boutonToilettes, boutonJardin};
         for(int i=0;i<boutonPieceListe.length;i++)
@@ -539,29 +546,29 @@ public class FenetreJeu extends JFrame{
         }
     }
 
-    void boutonActionSetVisible(Personnage perso)
+    void boutonActionSetVisible(Personnage perso)//selection des boutons d'actions à afficher en fonction de la piece actuelle
     {
         boutonActionReset();
         if(perso.getPiece()==0)
         {
         }
-        else if(perso.getPiece()==1)
+        else if(perso.getPiece()==1)//cuisine ou atelier
         {
             boutonManger.setEnabled(true);
         }
-        else if(perso.getPiece()==2)
+        else if(perso.getPiece()==2)//chambre ou centrale
         {
             boutonDormir.setEnabled(true);
         }
-        else if(perso.getPiece()==3)
+        else if(perso.getPiece()==3)//salle de bain ou station lavage
         {
             boutonLaver.setEnabled(true);
         }
-        else if(perso.getPiece()==4)
+        else if(perso.getPiece()==4)//toilettes ou garage
         {
             boutonAllerToilettes.setEnabled(true);
         }
-        else if(perso.getPiece()==5)
+        else if(perso.getPiece()==5)//jardin ou salle de jeu
         {
             boutonJouer.setEnabled(true);
         }
@@ -603,7 +610,7 @@ public class FenetreJeu extends JFrame{
         demanderQuitter=false;
     }
 
-    private Color getCouleurBarre(int val)
+    private Color getCouleurBarre(int val)//couleur des barres en fonction de sa valeur 0=rouge, 100=vert
     {
         if (val!=0)
         {
@@ -627,20 +634,21 @@ public class FenetreJeu extends JFrame{
     }
 
 
-    void refresh(Personnage perso)
+    void refresh(Personnage perso)      //actualisation de la fenetre
     {
-        selectImagePerso(perso);
+        selectImagePerso(perso);        //choix de l'image du personnage
         imagePersoLabel.setIcon(imagePerso);
-        selectImagePiece(perso);
+        selectImagePiece(perso);        //choix de l'image de la piece
         imagePieceLabel.setIcon(imagePiece);
 
-        textEtatPhys.setText("Etat physique : "+perso.getEtatPhys());
+        textEtatPhys.setText("Etat physique : "+perso.getEtatPhys());   //actualisation texte etat physique
 
-        textEtatMoral.setText("Etat moral : "+perso.getEtatMoral());
+        textEtatMoral.setText("Etat moral : "+perso.getEtatMoral());    //actualisation texte etat moral
 
         int l=largeur*5/8;
         int h=hauteur*1/2;
-
+        
+                                                                        //actualisation de la taille et de la couleur des barres
         barre1.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(0)/100)), (int)(h*0.08-8));
         barre1.setBackground(getCouleurBarre((int)perso.getCaracteristique(0)));
 

@@ -7,6 +7,7 @@ public class Jeu {
 	private FenetreLancement fenLanc;
 	private FenetreCreation fenCreat;
     private FenetreJeu fenJeu;
+
 	Jeu()
 	{
 		pieces=new ArrayList<Piece>();
@@ -66,7 +67,7 @@ public class Jeu {
 	private void lancement()
 	{
 		fenLanc=new FenetreLancement();
-		while(fenLanc.getActive()==true)
+		while(fenLanc.getActive()==true)//boucle qui attend la fermeture de la fenetre de lancement
 		{
 			try
 			{
@@ -77,18 +78,18 @@ public class Jeu {
 				System.out.println("Interruption");
 			}
 		}
-		if(fenLanc.getFermeture()==1)
+		if(fenLanc.getFermeture()==1)//fenetre de lancement fermée avec le bouton QUITTER
 		{
 			System.out.println("Fermeture Bouton Quitter");
 		}
-		else if(fenLanc.getFermeture()==2)
+		else if(fenLanc.getFermeture()==2)//fenetre de lancement fermée pour lancer une NOUVELLE PARTIE
 		{
 			System.out.println("Nouvelle Partie");
 			initPerso();
 			fenJeu=new FenetreJeu(perso, pieces);
 			simulation();
 		}
-		else if(fenLanc.getFermeture()==3)
+		else if(fenLanc.getFermeture()==3)//fenetre de lancement fermée pour CHARGER une PARTIE EXISTANTE
 		{
 			System.out.println("Charger Partie - "+fenLanc.getFileToStart());
 			perso=Sauvegarde.charger(fenLanc.getFileToStart());
@@ -97,13 +98,14 @@ public class Jeu {
 		}
 	}
 
-	private void interact()
+	private void interact()//lecture des boutons appuyés et calcul des nouvelles valeurs des caracteristiques
 	{
 		ArrayList<Boolean> b=fenJeu.getBoutonAppuye();
 		fenJeu.resetBoutonAppuye();
+
 		perso.setAllCaracteristiques(b);
 
-		if(fenJeu.getBoutonSauvegarde())
+		if(fenJeu.getBoutonSauvegarde())//sauvegarde demandée
 		{
 			Sauvegarde.sauvegarder(perso);
 			fenJeu.resetBoutonSauvegarde();
@@ -112,12 +114,12 @@ public class Jeu {
 
 	private void simulation()
 	{
-		while(fenJeu.getBoutonQuitter()==false)
+		while(fenJeu.getBoutonQuitter()==false)	//boucle qui attend que le jeu soit quitté
 		{
-			interact();
-			fenJeu.refresh(perso);
+			interact();							//lecture des boutons et calculs caracteristiques
+			fenJeu.refresh(perso);				//actualisation du visuel
 
-			//temporisation
+			//temporisation 50ms
 			try
 			{
 				TimeUnit.MILLISECONDS.sleep(50);
@@ -127,6 +129,6 @@ public class Jeu {
 				System.out.println("Interruption");
 			}
 		}
-		Sauvegarde.sauvegarder(perso);
+		Sauvegarde.sauvegarder(perso);			//sauvegarde quand le joueur quitte
 	}
 }

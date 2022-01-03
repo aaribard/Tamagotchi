@@ -12,7 +12,7 @@ public class Robot extends Personnage{
         super.nomCaracteristiques=new ArrayList<String>(Arrays.asList("Vie","Integrité","Batterie","Propreté","Huile","Moral"));
         super.fichiersCaracteristiques=new ArrayList<String>(Arrays.asList("img/LogoBarres/vie2Logo.png","img/LogoBarres/integriteLogo.png","img/LogoBarres/batterieLogo.png","img/LogoBarres/propreteLogo.png","img/LogoBarres/huileLogo.png","img/LogoBarres/moralLogo.png"));
         super.fichiersPersonnages=new ArrayList<String>(Arrays.asList("img/Personnages/robot.gif","img/Personnages/robotDodo.gif"));
-        super.fichiersPieces=new ArrayList<String>(Arrays.asList("img/Pieces/courFond.png","img/Pieces/atlierFond.png","img/Pieces/centraleFond.png","img/Pieces/stationFond.png","img/Pieces/garageFond.png","img/Pieces/salleFond.png"));
+        super.fichiersPieces=new ArrayList<String>(Arrays.asList("img/Pieces/courFond.png","img/Pieces/atelierFond.png","img/Pieces/centraleFond.png","img/Pieces/stationFond.png","img/Pieces/garageFond.png","img/Pieces/salleFond.png"));
         //     -----     duree max modifieur     -----
         super.activeButtonMaxTime = new ArrayList<Duration>();
         super.activeButtonMaxTime.add(Duration.ofSeconds(3));//Vie

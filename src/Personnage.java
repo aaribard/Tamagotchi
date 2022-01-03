@@ -5,32 +5,29 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 
-import javax.lang.model.util.ElementScanner6;
-
-
 public class Personnage {
 	private String nom;
 	private LocalDate dateNaissance;
 	private int pieceActuelle;
 	private ArrayList<Double> caracteristiques;
-	protected ArrayList<String> nomCaracteristiques;
 	private String etatPhysique;
 	private String etatMoral;
 	protected int type=1;
 
-	private ArrayList<Boolean> activeButton;
-	private ArrayList<Instant> activeButtonTime;
+	private ArrayList<Boolean> activeButton;					//liste des actions activés
+	private ArrayList<Instant> activeButtonTime;				//liste des moments d'activation des actions
 
-	protected ArrayList<Duration> activeButtonMaxTime;
-	protected ArrayList<ArrayList<Double>> activeButtonSpeed;
+	protected ArrayList<Duration> activeButtonMaxTime;			//liste des temps max d'activation des actions
+	protected ArrayList<ArrayList<Double>> activeButtonSpeed;	//liste des vitesse d'influence des actions sur les caracteristiques
 
-	protected ArrayList<Double> CaractTimeSpeed;
+	protected ArrayList<Double> CaractTimeSpeed;				//liste des vitesse d'influence du temps sur les caracteristiques
 
-	protected ArrayList<String> fichiersCaracteristiques;
-	protected ArrayList<String> fichiersPieces;
-	protected ArrayList<String> fichiersPersonnages;
+	protected ArrayList<String> fichiersCaracteristiques;		//liste des noms de fichier des icones de barres
+	protected ArrayList<String> fichiersPieces;					//liste des noms de fichier des images de fond des pieces
+	protected ArrayList<String> fichiersPersonnages;			//liste des noms de fichier des images des personnages
 
-	protected ArrayList<String> nomActions;
+	protected ArrayList<String> nomActions;						//liste des noms des actions
+	protected ArrayList<String> nomCaracteristiques;			//liste des noms des caracteristiques
 
 	
 	public Personnage(String n)
@@ -40,13 +37,7 @@ public class Personnage {
 		pieceActuelle=0;
 		etatPhysique="En forme";
 		etatMoral="Heureux";
-		caracteristiques=new ArrayList<Double>();
-		caracteristiques.add(100.);
-		caracteristiques.add(70.);
-		caracteristiques.add(70.);
-		caracteristiques.add(70.);
-		caracteristiques.add(70.);
-		caracteristiques.add(70.);
+		caracteristiques=new ArrayList<Double>(Arrays.asList(100.,70.,70.,70.,70.));	//valeurs par defaut des caracteristiques
 		activeButton = new ArrayList<Boolean>(Arrays.asList(false,false,false,false,false,false));
 		activeButtonTime = new ArrayList<Instant>(Arrays.asList(Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now()));
 	}
@@ -87,7 +78,7 @@ public class Personnage {
     {
         return nomCaracteristiques;
     }
-	public void setCaracteristique(int n, double v)
+	public void setCaracteristique(int n, double v) //Set la valeur de la caracteristique n, verifie si 0<=v<=100
 	{
 		if(v<=0.)
 		{
@@ -138,7 +129,6 @@ public class Personnage {
 	{
 		return nomActions.get(i);
 	}
-
 	public boolean getactiveButton(int n)
 	{
 		return activeButton.get(n);
@@ -185,9 +175,9 @@ public class Personnage {
 	{
 		etatMoral=s;
 	}
-	public void setAllCaracteristiques(ArrayList<Boolean> b)
+	public void setAllCaracteristiques(ArrayList<Boolean> b)	//calcule les nouvelles valeurs des caracteristiques
 	{
-		//bouton actifs
+		//     -----     bouton actifs     -----
 		if(b.get(0)==true)//manger
 		{			
 			setActiveButton(0, true);
@@ -221,14 +211,14 @@ public class Personnage {
 			setActiveButtonTime(5, Instant.now());
 		}
 
-		//evolution caracteristiques avec le temps
+		//     -----     evolution caracteristiques avec le temps     -----     
 
 		for(int i=0;i<6;i++)
 		{
 			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*0.05);
 		}
 
-		//evolution caracteristiques avec les boutons
+		//     -----     evolution caracteristiques avec les boutons     -----     
 		for(int i=0;i<activeButton.size();i++)
 		{
 			if(activeButton.get(i))
@@ -246,7 +236,7 @@ public class Personnage {
 				}
 			}
 		}
-		//evolution de la vie
+		//     -----     evolution de la vie     -----     
 		int nb=0;
 		for(int i=1;i<6;i++)
 		{
@@ -276,7 +266,7 @@ public class Personnage {
 		{
 			this.setCaracteristique(0, this.getCaracteristique(0)-0.05);
 		}
-		//evolution de l'etat physique
+		//     -----     evolution de l'etat physique     -----     
 		if(this.getCaracteristique(2)<30)
 		{
 			etatPhysique="Fatigué";
