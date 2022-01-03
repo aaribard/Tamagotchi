@@ -24,7 +24,7 @@ public class Chat extends Animal{
         super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,0.,-30.)));//reveiller -
         super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,5.,0.,0.)));//laver
         super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,5.,0.)));//toilettes
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-0.5,-0.5,0.,3.)));//jouer .--..
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-0.5,-0.5,0.,3.)));//jouer .++..
 
         //     -----     vitesse de l'effet du temps     -----
         super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-0.1,-0.2,-0.1,-0.1,-0.1)));//dormir +

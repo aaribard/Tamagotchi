@@ -138,7 +138,7 @@ public class FenetreLancement extends JFrame{
             flecheChargerPartieDroite.setBounds(380,50,20,100);
             flecheChargerPartieDroite.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
-                    fileOffset+=1;
+                    fileOffset+=4;
                     refreshBoutonCharger();
                 }});
 
@@ -148,7 +148,7 @@ public class FenetreLancement extends JFrame{
                 {
                     if(fileOffset>0)
                     {
-                        fileOffset-=1;
+                        fileOffset-=4;
                     }
                     refreshBoutonCharger();
                 }});

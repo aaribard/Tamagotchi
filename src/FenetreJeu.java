@@ -547,34 +547,34 @@ public class FenetreJeu extends JFrame{
         }
         else if(perso.getPiece()==1)
         {
-            boutonManger.setVisible(true);
+            boutonManger.setEnabled(true);
         }
         else if(perso.getPiece()==2)
         {
-            boutonDormir.setVisible(true);
+            boutonDormir.setEnabled(true);
         }
         else if(perso.getPiece()==3)
         {
-            boutonLaver.setVisible(true);
+            boutonLaver.setEnabled(true);
         }
         else if(perso.getPiece()==4)
         {
-            boutonAllerToilettes.setVisible(true);
+            boutonAllerToilettes.setEnabled(true);
         }
         else if(perso.getPiece()==5)
         {
-            boutonJouer.setVisible(true);
+            boutonJouer.setEnabled(true);
         }
     }
 
     void boutonActionReset()
     {
-        boutonManger.setVisible(false);
-        boutonDormir.setVisible(false);
-        boutonReveiller.setVisible(false);
-        boutonLaver.setVisible(false);
-        boutonAllerToilettes.setVisible(false);
-        boutonJouer.setVisible(false);
+        boutonManger.setEnabled(false);
+        boutonDormir.setEnabled(false);
+        boutonReveiller.setEnabled(false);
+        boutonLaver.setEnabled(false);
+        boutonAllerToilettes.setEnabled(false);
+        boutonJouer.setEnabled(false);
     }
 
     ArrayList<Boolean> getBoutonAppuye()

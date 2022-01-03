@@ -14,7 +14,7 @@ public class Jeu {
 
 		lancement();
 	}
-	public void initPieces()
+	private void initPieces()
 	{
 		pieces.add(new Piece("salon"));
 		pieces.add(new Piece("cuisine"));
@@ -46,17 +46,17 @@ public class Jeu {
 		pieces.get(5).addPieceAdja(pieces.get(0));
 	}
 
-	public void initPerso()
+	private void initPerso()
 	{
 		fenCreat= new FenetreCreation();
 		while(fenCreat.getActive())
 		{	try
 			{
-				Thread.sleep(20);
+				TimeUnit.MILLISECONDS.sleep(50);
 			}
-			catch(InterruptedException ex)
+			catch (InterruptedException a)
 			{
-				Thread.currentThread().interrupt();
+				System.out.println("Interruption");
 			}
 		}
 		perso = fenCreat.getPersonnage();
@@ -97,7 +97,7 @@ public class Jeu {
 		}
 	}
 
-	public void interact()
+	private void interact()
 	{
 		ArrayList<Boolean> b=fenJeu.getBoutonAppuye();
 		fenJeu.resetBoutonAppuye();
@@ -112,16 +112,11 @@ public class Jeu {
 
 	private void simulation()
 	{
-		for(int i=0;i<1200;i++)
+		while(fenJeu.getBoutonQuitter()==false)
 		{
 			interact();
 			fenJeu.refresh(perso);
 
-			//bouton Quitter
-			if(fenJeu.getBoutonQuitter())
-			{
-				break;
-			}
 			//temporisation
 			try
 			{
@@ -132,5 +127,6 @@ public class Jeu {
 				System.out.println("Interruption");
 			}
 		}
+		Sauvegarde.sauvegarder(perso);
 	}
 }

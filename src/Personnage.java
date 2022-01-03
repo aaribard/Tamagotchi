@@ -41,12 +41,12 @@ public class Personnage {
 		etatPhysique="En forme";
 		etatMoral="Heureux";
 		caracteristiques=new ArrayList<Double>();
-		caracteristiques.add(10.);
-		caracteristiques.add(25.);
-		caracteristiques.add(45.);
-		caracteristiques.add(65.);
-		caracteristiques.add(85.);
 		caracteristiques.add(100.);
+		caracteristiques.add(70.);
+		caracteristiques.add(70.);
+		caracteristiques.add(70.);
+		caracteristiques.add(70.);
+		caracteristiques.add(70.);
 		activeButton = new ArrayList<Boolean>(Arrays.asList(false,false,false,false,false,false));
 		activeButtonTime = new ArrayList<Instant>(Arrays.asList(Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now()));
 	}
@@ -246,7 +246,6 @@ public class Personnage {
 				}
 			}
 		}
-
 		//evolution de la vie
 		int nb=0;
 		for(int i=1;i<6;i++)
