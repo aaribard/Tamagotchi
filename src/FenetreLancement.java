@@ -36,6 +36,8 @@ public class FenetreLancement extends JFrame{
 
     FenetreLancement()
     {
+
+        Color couleurFond= new Color(242,234,111);
         this.setTitle("Création Tamagotchi");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -44,18 +46,18 @@ public class FenetreLancement extends JFrame{
 
         panneau1 = new JPanel();
         panneau1.setBounds(0,0,400,50);
-        panneau1.setBackground(Color.red);
+        panneau1.setBackground(couleurFond);
         panneau2 = new JPanel();
         panneau2.setBounds(0,50,400,50);
-        panneau2.setBackground(Color.blue);
+        panneau2.setBackground(couleurFond);
         panneau2.setLayout(null);
         panneau3 = new JPanel();
         panneau3.setBounds(0,100,400,150);
-        panneau3.setBackground(Color.green);
+        panneau3.setBackground(couleurFond);
         panneau3.setLayout(null);
         panneau4 = new JPanel();
         panneau4.setBounds(0,250,400,50);
-        panneau4.setBackground(Color.black);
+        panneau4.setBackground(couleurFond);
         panneau4.setLayout(null);
 
         //     -----     panneau 1     -----     

@@ -138,6 +138,7 @@ public class Jeu {
 		if(fenJeu.getBoutonQuitter()==true)
 		{
 			Sauvegarde.sauvegarder(perso);			//sauvegarde quand le joueur quitte
+			lancement();
 		}
 	}
 }

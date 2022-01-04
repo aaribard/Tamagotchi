@@ -12,7 +12,7 @@ public class Personnage {
 	private ArrayList<Double> caracteristiques;
 	private String etatPhysique;
 	private String etatMoral;
-	protected int type=1;
+	protected int type;
 
 	private ArrayList<Boolean> activeButton;					//liste des actions activés
 	private ArrayList<Instant> activeButtonTime;				//liste des moments d'activation des actions
@@ -233,10 +233,10 @@ public class Personnage {
 						this.setCaracteristique(j, this.getCaracteristique(j)+activeButtonSpeed.get(i).get(j)*0.05);
 					}
 				}
-				else
-				{
-					activeButton.set(i,false);
-				}
+			}
+			else
+			{
+				activeButton.set(i,false);
 			}
 		}
 		//     -----     evolution de la vie     -----     
@@ -287,17 +287,26 @@ public class Personnage {
 			etatPhysique="En forme";
 		}
 	}
-	public void setAllCaracteristiquesRestart(long time, int dodo, int dtDodo)
+	public void setAllCaracteristiquesRestart(long time, int dodo, long dtDodo)
 	{
 		long dt=Instant.now().getEpochSecond()-time;
-		System.out.println(dt);
 		for(int i=0;i<6;i++)
 		{
-			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*dt);//effectue le caclcul pour dt secondes
+			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*dt);//effectue le calcul pour dt secondes
 		}
 		if(dodo==1)
 		{
-			this.setCaracteristique(2, this.getCaracteristique(2)+activeButtonSpeed.get(1).get(2)*dtDodo);//effectue le calcul pour dt secondes de sommeil restant
+			if(time+dtDodo<Instant.now().getEpochSecond())
+			{
+				this.setCaracteristique(2, this.getCaracteristique(2)+activeButtonSpeed.get(1).get(2)*dtDodo);//effectue le calcul pour dt secondes de sommeil restant
+				this.setActiveButton(1, false);
+			}
+			else
+			{
+				this.setActiveButton(1, true);
+				this.setCaracteristique(2, this.getCaracteristique(2)+activeButtonSpeed.get(1).get(2)*(Instant.now().getEpochSecond()-time));
+				this.setActiveButtonTime(1, Instant.ofEpochSecond(time));
+			}
 		}
 	}
 

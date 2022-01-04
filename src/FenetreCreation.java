@@ -22,6 +22,7 @@ public class FenetreCreation extends JFrame{
 
     FenetreCreation()
     {
+        Color couleurFond= new Color(242,234,111);
         this.setTitle("Création Tamagotchi");
         this.setResizable(false);
         this.setLocationRelativeTo(null);
@@ -29,18 +30,18 @@ public class FenetreCreation extends JFrame{
         active = true;
         panneau1 = new JPanel();
         panneau1.setBounds(0,0,400,50);
-        panneau1.setBackground(Color.red);
+        panneau1.setBackground(couleurFond);
         panneau2 = new JPanel();
         panneau2.setBounds(0,50,400,50);
-        panneau2.setBackground(Color.blue);
+        panneau2.setBackground(couleurFond);
         panneau2.setLayout(null);
         panneau3 = new JPanel();
         panneau3.setBounds(0,100,400,150);
-        panneau3.setBackground(Color.green);
+        panneau3.setBackground(couleurFond);
         panneau3.setLayout(null);
         panneau4 = new JPanel();
         panneau4.setBounds(0,250,400,50);
-        panneau4.setBackground(Color.black);
+        panneau4.setBackground(couleurFond);
         panneau4.setLayout(null);
 
         titre =new JLabel("Choisissez le nom et le type de votre personnage?"); 
@@ -70,6 +71,7 @@ public class FenetreCreation extends JFrame{
                 boutonLapin.setBackground(Color.white);
                 boutonRobot.setBackground(Color.white);
                 typeSelection=0;
+                boutonJouer.setEnabled(true);
             }});
         boutonChat.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
             {
@@ -78,6 +80,7 @@ public class FenetreCreation extends JFrame{
                 boutonLapin.setBackground(Color.white);
                 boutonRobot.setBackground(Color.white);
                 typeSelection=1;
+                boutonJouer.setEnabled(true);
             }});
         boutonLapin.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
             {
@@ -86,6 +89,7 @@ public class FenetreCreation extends JFrame{
                 boutonLapin.setBackground(Color.gray);
                 boutonRobot.setBackground(Color.white);
                 typeSelection=2;
+                boutonJouer.setEnabled(true);
             }});
         boutonRobot.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
             {
@@ -94,6 +98,7 @@ public class FenetreCreation extends JFrame{
                 boutonLapin.setBackground(Color.white);
                 boutonRobot.setBackground(Color.gray);
                 typeSelection=3;
+                boutonJouer.setEnabled(true);
             }});
 
         panneau3.add(boutonChien);
@@ -103,28 +108,33 @@ public class FenetreCreation extends JFrame{
 
         boutonJouer = new JButton("Jouer");
         boutonJouer.setBounds(100,0,200,50);
+        boutonJouer.setEnabled(false);
 
         boutonJouer.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
             {
                 nom=champNom.getText();
-                if(typeSelection==0)
+                System.out.println(nom.length());
+                if((nom instanceof String)&&(nom.length()>=1)&&(nom.length()<=20))
                 {
-                    perso=new Chien(nom);
+                    if(typeSelection==0)
+                    {
+                        perso=new Chien(nom);
+                    }
+                    else if(typeSelection==1)
+                    {
+                        perso=new Chat(nom);
+                    }
+                    else if(typeSelection==2)
+                    {
+                        perso=new Lapin(nom);
+                    }
+                    else if(typeSelection==3)
+                    {
+                        perso=new Robot(nom);
+                    }
+                    active = false;
+                    fermerFenetre();
                 }
-                else if(typeSelection==1)
-                {
-                    perso=new Chat(nom);
-                }
-                else if(typeSelection==2)
-                {
-                    perso=new Lapin(nom);
-                }
-                else if(typeSelection==3)
-                {
-                    perso=new Robot(nom);
-                }
-                active = false;
-                fermerFenetre();
             }});
         
         panneau4.add(boutonJouer);

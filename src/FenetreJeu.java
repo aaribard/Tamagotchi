@@ -197,7 +197,7 @@ public class FenetreJeu extends JFrame{
         int h=hauteur*1/2;
         textNom =new JLabel(perso.getNom());
         textNom.setFont(new Font("Bookman Old Style", Font.PLAIN, 24));
-        textNom.setBounds((int)(l*0.08),(int)(h*0.1),100,30);
+        textNom.setBounds((int)(l*0.08),(int)(h*0.1),(int)(300-l*0.08),30);
         panneau2.add(textNom);
 
         ArrayList<Integer> ageList = perso.getAge();
@@ -443,6 +443,7 @@ public class FenetreJeu extends JFrame{
 
 //                  ---------------              panneau 4                  ---------------              
 
+
     private void affichagePanneau4(Personnage perso, ArrayList<Piece> pieces)
     {
         boutonSalon=new JLabel(new ImageIcon("img/Plan/fleche.png"));
@@ -468,7 +469,7 @@ public class FenetreJeu extends JFrame{
             }});
 
         boutonChambre=new JLabel(new ImageIcon("img/Plan/fleche.png"));
-        boutonChambre.setBounds(160, 200, 24, 24);
+        boutonChambre.setBounds(200, 200, 24, 24);
         panneau4.add(boutonChambre);
 
         boutonChambre.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
@@ -479,7 +480,7 @@ public class FenetreJeu extends JFrame{
             }});
 
         boutonSdb=new JLabel(new ImageIcon("img/Plan/fleche.png"));
-        boutonSdb.setBounds(160, 150, 24, 24);
+        boutonSdb.setBounds(200, 150, 24, 24);
         panneau4.add(boutonSdb);
 
         boutonSdb.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
@@ -490,7 +491,7 @@ public class FenetreJeu extends JFrame{
             }});
 
         boutonToilettes=new JLabel(new ImageIcon("img/Plan/fleche.png"));
-        boutonToilettes.setBounds(160, 105, 24, 24);
+        boutonToilettes.setBounds(200, 105, 24, 24);
         panneau4.add(boutonToilettes);
 
         boutonToilettes.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
@@ -501,7 +502,7 @@ public class FenetreJeu extends JFrame{
             }});
 
         boutonJardin=new JLabel(new ImageIcon("img/Plan/fleche.png"));
-        boutonJardin.setBounds(90, 65, 24, 24);
+        boutonJardin.setBounds(120, 30, 24, 24);
         panneau4.add(boutonJardin);
 
         boutonJardin.addMouseListener(new MouseAdapter(){public void mouseClicked(MouseEvent e)
@@ -530,13 +531,15 @@ public class FenetreJeu extends JFrame{
         {
             if(i==perso.getPiece())
             {
-                boutonPieceListe[i].setVisible(false);
+                boutonPieceListe[i].setVisible(true);
+                boutonPieceListe[i].setIcon(new ImageIcon("img/Plan/rondVert.png"));
             }
             else
             {
                 if(pieces.get(perso.getPiece()).getPieceAdja().contains(pieces.get(i)))
                 {
                     boutonPieceListe[i].setVisible(true);
+                    boutonPieceListe[i].setIcon(new ImageIcon("img/Plan/fleche.png"));
                 }
                 else
                 {
@@ -666,5 +669,32 @@ public class FenetreJeu extends JFrame{
 
         barre6.setBounds(4, 4, (int)((l*0.5-8)*(perso.getCaracteristique(5)/100)), (int)(h*0.08-8));
         barre6.setBackground(getCouleurBarre((int)perso.getCaracteristique(5)));
+
+        if(perso.getactiveButton(1))
+        {
+            boutonReveiller.setText(perso.getNomActions(2));
+            boutonDormir.setVisible(false);
+            boutonReveiller.setVisible(true);
+            boutonReveiller.setEnabled(true);
+            perso.setActiveButton(2,false);
+            boutonReveiller.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+                    boutonAppuye.set(2,true);
+                }});
+        }
+
+        else if(perso.getactiveButton(2))
+        {
+            boutonDormir.setText(perso.getNomActions(1));
+            boutonDormir.setVisible(true);
+            boutonDormir.setEnabled(true);
+            boutonReveiller.setVisible(false);
+            perso.setActiveButton(1,false);
+            boutonDormir.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+                    boutonAppuye.set(1,true);
+                }});
+        }
+        
     }
 }

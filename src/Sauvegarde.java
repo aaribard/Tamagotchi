@@ -18,7 +18,7 @@ public class Sauvegarde {
                 txtSauv.println(perso.getPiece());
                 txtSauv.println(Instant.now().getEpochSecond());
                 txtSauv.println(perso.getactiveButton(1)?1:0);
-                txtSauv.println(Instant.now().getEpochSecond()+perso.getactiveButtonMaxTime(1).getSeconds()-perso.getactiveButtonTime(1).getEpochSecond());
+                txtSauv.println(perso.getactiveButtonTime(1).getEpochSecond()+perso.getactiveButtonMaxTime(1).getSeconds()-Instant.now().getEpochSecond());
                 txtSauv.flush();
                 txtSauv.close();
                 System.out.println("Sauvegarde effectuée - "+nomFichier);
@@ -67,7 +67,10 @@ public class Sauvegarde {
                 i++;
             }
             perso.setPiece(piece);
-            perso.setAllCaracteristiquesRestart(Long.parseLong(lect.readLine()), Integer.parseInt(lect.readLine()), Integer.parseInt(lect.readLine()));
+            long t1=Long.parseLong(lect.readLine());
+            int t2=Integer.parseInt(lect.readLine());
+            long t3=Long.parseLong(lect.readLine());
+            perso.setAllCaracteristiquesRestart(t1,t2,t3);
             lect.close();
             return perso;
         }
