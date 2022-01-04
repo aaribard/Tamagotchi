@@ -28,7 +28,6 @@ public class Personnage {
 
 	protected ArrayList<String> nomActions;						//liste des noms des actions
 	protected ArrayList<String> nomCaracteristiques;			//liste des noms des caracteristiques
-
 	
 	public Personnage(String n)
 	{
@@ -37,7 +36,7 @@ public class Personnage {
 		pieceActuelle=0;
 		etatPhysique="En forme";
 		etatMoral="Heureux";
-		caracteristiques=new ArrayList<Double>(Arrays.asList(100.,70.,70.,70.,70.));	//valeurs par defaut des caracteristiques
+		caracteristiques=new ArrayList<Double>(Arrays.asList(100.,70.,70.,70.,70.,70.));	//valeurs par defaut des caracteristiques
 		activeButton = new ArrayList<Boolean>(Arrays.asList(false,false,false,false,false,false));
 		activeButtonTime = new ArrayList<Instant>(Arrays.asList(Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now(),Instant.now()));
 	}
@@ -283,9 +282,16 @@ public class Personnage {
 		{
 			etatPhysique="En forme";
 		}
-
 	}
-
+	public void setAllCaracteristiquesRestart(long time)
+	{
+		long dt=Instant.now().getEpochSecond()-time;
+		System.out.println(dt);
+		for(int i=0;i<6;i++)
+		{
+			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*dt);//effectue le caclcul pour dt secondes
+		}
+	}
 
 
 }

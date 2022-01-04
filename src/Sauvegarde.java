@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Sauvegarde {
@@ -15,11 +16,29 @@ public class Sauvegarde {
                 txtSauv.println(dateNaissance.get(2));
                 txtSauv.println(perso.getCaracteristiqueString());
                 txtSauv.println(perso.getPiece());
+                txtSauv.println(Instant.now().getEpochSecond());
                 txtSauv.flush();
                 txtSauv.close();
                 System.out.println("Sauvegarde effectuée - "+nomFichier);
             }
             catch (java.io.IOException e) {e.printStackTrace();}
+    }
+
+    public static void effacer(Personnage perso)
+    {
+         try{
+                String nomFichier = perso.getNom()+"_"+perso.getDateNaissanceListe().get(2)+"_"+perso.getDateNaissanceListe().get(1)+"_"+perso.getDateNaissanceListe().get(0)+".txt";
+                File file = new File("save/"+nomFichier);
+                if(file.delete())
+                {
+                    System.out.println("Sauvegarde effacée - "+nomFichier);
+                }
+                else
+                {
+                    System.out.println("Effacement échouée - "+nomFichier);
+                }
+            }
+        catch (Exception e) {e.printStackTrace();}
     }
    
     public static Personnage charger(String fileName)
@@ -46,6 +65,7 @@ public class Sauvegarde {
                 i++;
             }
             perso.setPiece(piece);
+            perso.setAllCaracteristiquesRestart(Long.parseLong(lect.readLine()));
             lect.close();
             return perso;
         }

@@ -128,7 +128,16 @@ public class Jeu {
 			{
 				System.out.println("Interruption");
 			}
+			if(perso.getCaracteristique(0)<=0)
+			{
+				System.out.println(perso.getNom()+" est mort... Vous pouvez quitter le jeu");
+				Sauvegarde.effacer(perso);
+				break;
+			}
 		}
-		Sauvegarde.sauvegarder(perso);			//sauvegarde quand le joueur quitte
+		if(fenJeu.getBoutonQuitter()==true)
+		{
+			Sauvegarde.sauvegarder(perso);			//sauvegarde quand le joueur quitte
+		}
 	}
 }
