@@ -178,7 +178,7 @@ public class Personnage {
 	{
 		etatMoral=s;
 	}
-	public void setAllCaracteristiques(ArrayList<Boolean> b)	//calcule les nouvelles valeurs des caracteristiques
+	public void setAllCaracteristiques(ArrayList<Boolean> b, double cheat)	//calcule les nouvelles valeurs des caracteristiques
 	{
 		//     -----     bouton actifs     -----
 		if(b.get(0)==true)//manger
@@ -218,7 +218,7 @@ public class Personnage {
 
 		for(int i=0;i<6;i++)
 		{
-			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*0.05);
+			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*0.05*cheat);
 		}
 
 		//     -----     evolution caracteristiques avec les boutons     -----     

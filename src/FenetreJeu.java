@@ -81,6 +81,11 @@ public class FenetreJeu extends JFrame{
     boolean demanderQuitter=false;
     ArrayList<Boolean> boutonAppuye;    //liste des boutons appuyés
 
+    JButton boutonCheatplus;
+    JButton boutonCheatmoins;
+
+    double cheat=1;
+
     FenetreJeu(Personnage perso, ArrayList<Piece> pieces)
     {
         largeur=800;
@@ -520,6 +525,26 @@ public class FenetreJeu extends JFrame{
         {
             imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanUsine.png"));
         }
+        if(perso.getNom().compareTo("Cheat")==0)
+        {
+            boutonCheatplus=new JButton(new ImageIcon("img/Plan/plus.png"));
+            boutonCheatplus.setBounds(240, 270, 30, 30);
+            panneau4.add(boutonCheatplus);
+
+            boutonCheatplus.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+                    cheat*=10;
+                }});
+
+            boutonCheatmoins=new JButton(new ImageIcon("img/Plan/moins.png"));
+            boutonCheatmoins.setBounds(270, 270, 30, 30);
+            panneau4.add(boutonCheatmoins);
+
+            boutonCheatmoins.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
+                {
+                    cheat/=10;
+                }});
+        }
         imagePlanLabel.setBounds(0,0,300,300);
         panneau4.add(imagePlanLabel);
     }
@@ -696,6 +721,10 @@ public class FenetreJeu extends JFrame{
                 }});
         }
         
+    }
+    public double getCheat()
+    {
+        return cheat;
     }
     public void mort()
     {

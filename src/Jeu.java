@@ -103,7 +103,7 @@ public class Jeu {
 		ArrayList<Boolean> b=fenJeu.getBoutonAppuye();
 		fenJeu.resetBoutonAppuye();
 
-		perso.setAllCaracteristiques(b);
+		perso.setAllCaracteristiques(b, fenJeu.getCheat());
 
 		if(fenJeu.getBoutonSauvegarde())//sauvegarde demandée
 		{
