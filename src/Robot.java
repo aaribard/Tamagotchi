@@ -15,24 +15,25 @@ public class Robot extends Personnage{
         super.fichiersPieces=new ArrayList<String>(Arrays.asList("img/Pieces/courFond.png","img/Pieces/atelierFond.png","img/Pieces/centraleFond.png","img/Pieces/stationFond.png","img/Pieces/garageFond.png","img/Pieces/salleFond.png"));
         //     -----     duree max modifieur     -----
         super.activeButtonMaxTime = new ArrayList<Duration>();
-        super.activeButtonMaxTime.add(Duration.ofSeconds(3));//Vie
-        super.activeButtonMaxTime.add(Duration.ofSeconds(40));//Integrité
-        super.activeButtonMaxTime.add(Duration.ofSeconds(1));//Batterie
-        super.activeButtonMaxTime.add(Duration.ofSeconds(10));//Propreté
-        super.activeButtonMaxTime.add(Duration.ofSeconds(10));//Huile
-        super.activeButtonMaxTime.add(Duration.ofSeconds(20));//Moral
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//Entretenir
+        super.activeButtonMaxTime.add(Duration.ofSeconds(1800));//Recharger
+        super.activeButtonMaxTime.add(Duration.ofSeconds(2));//Débrancher
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//Nettoyer
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//Vidanger
+        super.activeButtonMaxTime.add(Duration.ofSeconds(120));//Jouer
 
         //     -----     vitesse modifieur     -----
         super.activeButtonSpeed = new ArrayList<ArrayList<Double>>();
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,15.,0.,0.,0.,0.)));//Vie
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,2.,0.,0.,0.)));//Integrité
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,0.,-15.)));//Batterie
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,5.,0.,0.)));//Propreté
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,5.,0.)));//Huile
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-1.,-1.,0.,3.)));//Moral
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,50./30,0.,0.,0.,0.)));//Entretenir
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,65./1800,0.,0.,0.)));//Recharger
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,0.,-20./2)));//Débrancher
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,40./30,0.,0.)));//Nettoyer
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,40./30,0.)));//Vidanger
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-15./120,-15./120,0.,45./120)));//Jouer
 
         //     -----     vitesse de l'effet du temps     -----
-        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-0.1,-0.1,-0.1,-0.1,-0.1)));
+        double s =86400.;//nombre de sec en 24h
+        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-4/s,-2/s,-4/s,-8/s,-8/s)));
     }
     
 }

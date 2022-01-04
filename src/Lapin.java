@@ -10,23 +10,24 @@ public class Lapin extends Animal{
 
         //     -----     duree max modifieur     -----
         super.activeButtonMaxTime = new ArrayList<Duration>();
-        super.activeButtonMaxTime.add(Duration.ofSeconds(3));//manger
-        super.activeButtonMaxTime.add(Duration.ofSeconds(20));//dormir
-        super.activeButtonMaxTime.add(Duration.ofSeconds(1));//reveiller
-        super.activeButtonMaxTime.add(Duration.ofSeconds(10));//laver
-        super.activeButtonMaxTime.add(Duration.ofSeconds(10));//toilettes
-        super.activeButtonMaxTime.add(Duration.ofSeconds(20));//jouer
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//manger
+        super.activeButtonMaxTime.add(Duration.ofSeconds(1800));//dormir
+        super.activeButtonMaxTime.add(Duration.ofSeconds(2));//reveiller
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//laver
+        super.activeButtonMaxTime.add(Duration.ofSeconds(30));//toilettes
+        super.activeButtonMaxTime.add(Duration.ofSeconds(120));//jouer
 
         //     -----     vitesse modifieur     -----
         super.activeButtonSpeed = new ArrayList<ArrayList<Double>>();
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,15.,0.,0.,0.,0.)));//manger
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,4.,0.,0.,0.)));//dormir +
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,0.,-15.)));//reveiller
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,5.,0.,0.)));//laver
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,5.,0.)));//toilettes
-        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-1.,-1.,0.,3.)));//jouer
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,50./30,0.,0.,0.,0.)));//manger
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,80./1800,0.,0.,0.)));//dormir +
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,0.,-20./2)));//reveiller
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,40./30,0.,0.)));//laver
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,0.,0.,40./30,0.)));//toilettes
+        super.activeButtonSpeed.add(new ArrayList<Double>(Arrays.asList(0.,0.,-15./120,-15./120,0.,60./120)));//jouer
 
         //     -----     vitesse de l'effet du temps     -----
-        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-0.1,-0.1,-0.1,-0.1,-0.2)));//jouer +
+        double s =86400.;//nombre de sec en 24h
+        super.CaractTimeSpeed = (new ArrayList<Double>(Arrays.asList(0.,-4/s,-2/s,-4/s,-8/s,-8/s)));//jouer +
     }
 }

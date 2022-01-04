@@ -140,6 +140,10 @@ public class Personnage {
 	{
 		return activeButtonTime.get(n);
 	}
+	public Duration getactiveButtonMaxTime(int n)
+	{
+		return activeButtonMaxTime.get(n);
+	}
 	public void setActiveButtonTime(int n, Instant v)
 	{
 		activeButtonTime.set(n,v);
@@ -283,13 +287,17 @@ public class Personnage {
 			etatPhysique="En forme";
 		}
 	}
-	public void setAllCaracteristiquesRestart(long time)
+	public void setAllCaracteristiquesRestart(long time, int dodo, int dtDodo)
 	{
 		long dt=Instant.now().getEpochSecond()-time;
 		System.out.println(dt);
 		for(int i=0;i<6;i++)
 		{
 			this.setCaracteristique(i, this.getCaracteristique(i)+CaractTimeSpeed.get(i)*dt);//effectue le caclcul pour dt secondes
+		}
+		if(dodo==1)
+		{
+			this.setCaracteristique(2, this.getCaracteristique(2)+activeButtonSpeed.get(1).get(2)*dtDodo);//effectue le calcul pour dt secondes de sommeil restant
 		}
 	}
 
