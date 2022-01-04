@@ -233,11 +233,12 @@ public class Personnage {
 						this.setCaracteristique(j, this.getCaracteristique(j)+activeButtonSpeed.get(i).get(j)*0.05);
 					}
 				}
+				else
+				{
+					activeButton.set(i,false);
+				}
 			}
-			else
-			{
-				activeButton.set(i,false);
-			}
+			
 		}
 		//     -----     evolution de la vie     -----     
 		int nb=0;
@@ -285,6 +286,22 @@ public class Personnage {
 		else
 		{
 			etatPhysique="En forme";
+		}
+		if(this.getCaracteristique(5)<30)
+		{
+			etatPhysique="Triste";
+		}
+		else if(this.getCaracteristique(5)<10)
+		{
+			etatPhysique="Désespéré";
+		}
+		else if(this.getCaracteristique(5)>80)
+		{
+			etatPhysique="Heureux";
+		}
+		else
+		{
+			etatPhysique="Content";
 		}
 	}
 	public void setAllCaracteristiquesRestart(long time, int dodo, long dtDodo)

@@ -525,6 +525,7 @@ public class FenetreJeu extends JFrame{
         {
             imagePlanLabel=new JLabel(new ImageIcon("img/Plan/PlanUsine.png"));
         }
+        //____________________Ajout pour les tests avec perso qui s'appelle Cheat____________________
         if(perso.getNom().compareTo("Cheat")==0)
         {
             boutonCheatplus=new JButton(new ImageIcon("img/Plan/plus.png"));
@@ -534,6 +535,7 @@ public class FenetreJeu extends JFrame{
             boutonCheatplus.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
                     cheat*=10;
+                    System.out.println("Cheat : x"+cheat);
                 }});
 
             boutonCheatmoins=new JButton(new ImageIcon("img/Plan/moins.png"));
@@ -543,6 +545,7 @@ public class FenetreJeu extends JFrame{
             boutonCheatmoins.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
                     cheat/=10;
+                    System.out.println("Cheat : x"+cheat);
                 }});
         }
         imagePlanLabel.setBounds(0,0,300,300);
@@ -701,7 +704,6 @@ public class FenetreJeu extends JFrame{
             boutonDormir.setVisible(false);
             boutonReveiller.setVisible(true);
             boutonReveiller.setEnabled(true);
-            perso.setActiveButton(2,false);
             boutonReveiller.addActionListener(new ActionListener(){public void actionPerformed(ActionEvent e)
                 {
                     boutonAppuye.set(2,true);

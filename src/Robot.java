@@ -20,7 +20,7 @@ public class Robot extends Personnage{
         super.activeButtonMaxTime.add(Duration.ofSeconds(2));//Débrancher
         super.activeButtonMaxTime.add(Duration.ofSeconds(30));//Nettoyer
         super.activeButtonMaxTime.add(Duration.ofSeconds(30));//Vidanger
-        super.activeButtonMaxTime.add(Duration.ofSeconds(120));//Jouer
+        super.activeButtonMaxTime.add(Duration.ofSeconds(60));//Jouer
 
         //     -----     vitesse modifieur     -----
         super.activeButtonSpeed = new ArrayList<ArrayList<Double>>();
