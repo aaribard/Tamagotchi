@@ -130,6 +130,7 @@ public class Jeu {
 			}
 			if(perso.getCaracteristique(0)<=0)
 			{
+				fenJeu.mort();
 				System.out.println(perso.getNom()+" est mort... Vous pouvez quitter le jeu");
 				Sauvegarde.effacer(perso);
 				break;

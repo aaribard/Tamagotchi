@@ -219,7 +219,7 @@ public class FenetreJeu extends JFrame{
 
         textEtatPhys =new JLabel("Etat physique : "+perso.getEtatPhys());
         textEtatPhys.setFont(new Font("Bookman Old Style", Font.PLAIN, 13));
-        textEtatPhys.setBounds((int)(l*0.2),(int)(h*0.6),200,20);
+        textEtatPhys.setBounds((int)(l*0.2),(int)(h*0.6),240,20);
         panneau2.add(textEtatPhys);
 
         textEtatMoral =new JLabel("Etat moral : "+perso.getEtatMoral());
@@ -696,5 +696,11 @@ public class FenetreJeu extends JFrame{
                 }});
         }
         
+    }
+    public void mort()
+    {
+        imagePersoLabel.setIcon(new ImageIcon("img/Personnages/tombe.png"));
+        textEtatPhys.setText("Etat physique : Mort");   //actualisation texte etat physique
+        textEtatMoral.setText("Etat moral : Mort");    //actualisation texte etat moral
     }
 }
