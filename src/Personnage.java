@@ -285,9 +285,9 @@ public class Personnage {
 		}
 		else
 		{
-			etatMoral="En forme";
+			etatPhysique="En forme";
 		}
-		
+
 		if(this.getCaracteristique(5)<30)
 		{
 			etatMoral="Triste";
