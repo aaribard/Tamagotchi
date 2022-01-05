@@ -285,23 +285,24 @@ public class Personnage {
 		}
 		else
 		{
-			etatPhysique="En forme";
+			etatMoral="En forme";
 		}
+		
 		if(this.getCaracteristique(5)<30)
 		{
-			etatPhysique="Triste";
+			etatMoral="Triste";
 		}
 		else if(this.getCaracteristique(5)<10)
 		{
-			etatPhysique="Désespéré";
+			etatMoral="Désespéré";
 		}
 		else if(this.getCaracteristique(5)>80)
 		{
-			etatPhysique="Heureux";
+			etatMoral="Heureux";
 		}
 		else
 		{
-			etatPhysique="Content";
+			etatMoral="Content";
 		}
 	}
 	public void setAllCaracteristiquesRestart(long time, int dodo, long dtDodo)
